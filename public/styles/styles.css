@@ -76,7 +76,7 @@
 
 .container {
     display: grid;
-    grid-template-rows: 0.2fr 1fr 0.13fr;
+    grid-template-rows: 0.1fr 1fr 0.1fr;
     grid-auto-columns: 1fr;
     /*gap: 1% 1%;*/
     grid-auto-flow: row;
@@ -95,3 +95,43 @@
   
   .footer { grid-area: 3 / 1 / 4 / 2; }
   
+
+
+  /*===================================================*/
+
+.container2
+{
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+  
+.content1
+{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+}
+  
+.content2
+{
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    justify-content:flex-end;  
+}
+
+@media screen and (min-width: 401px) and (max-width: 1024px)
+{
+    .content1{
+        flex: 1;
+    }
+    .content2{
+        display: none;
+    }
+}

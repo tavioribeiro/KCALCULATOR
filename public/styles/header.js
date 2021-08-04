@@ -2,9 +2,7 @@ import React from "react";
 import {
   Box,
   Stack,
-  Heading,
   Flex,
-  Text,
   Button,
   useDisclosure,
   Link
@@ -12,9 +10,6 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 
-var a = "/sobre";
-
-import {Botao2, Greeting} from './OwnComponents'
 
 // Note: This code could be better,
 // so I'd recommend you to understand how I solved and you could write yours better :)
@@ -32,7 +27,7 @@ const Header = (props) => {
       align="center"
       justify="space-between"
       wrap="wrap"
-      padding={4}
+      padding={3}
       bg="black"
       color="white"
       {...props}

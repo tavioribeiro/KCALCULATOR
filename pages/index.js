@@ -9,11 +9,11 @@ import { ChakraProvider, Button } from "@chakra-ui/react";
 
 
 
-import Link from 'next/link';
 
 
 import Header from "../public/styles/header";
 import SmallWithSocial from "../public/styles/footer";
+import BodyCard from "../public/styles/body1";
 
 
 
@@ -32,20 +32,28 @@ function Home()
       <div class="container">
         <div class="header">
           <ChakraProvider>
-            <Header />
+            <Header/>
           </ChakraProvider>
         </div>
+
         <div class="main">
+          <div class="container2">
+            <div class="content1">
+              <ChakraProvider>
+                <BodyCard></BodyCard>
+              </ChakraProvider>
+            </div>
 
+            <div class="content2">
+              <img src="/assets/fit.svg"></img>
+            </div>
+          </div>
           
-        <ChakraProvider>
-
-        </ChakraProvider>
-
         </div>
+
         <div class="footer">
           <ChakraProvider>
-            <SmallWithSocial />
+            <SmallWithSocial/>
           </ChakraProvider>
         </div>
       </div>

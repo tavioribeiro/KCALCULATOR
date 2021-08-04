@@ -8,13 +8,7 @@ import Link from 'next/link';
 
 import {
   ChakraProvider,
-  Box,
-  Stack,
-  Heading,
-  Flex,
-  Text,
   Button,
-  useDisclosure,
 } from "@chakra-ui/react";
 
 function Erro404()

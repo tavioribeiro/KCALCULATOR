@@ -11,9 +11,9 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Header from "../public/styles/header";
 import SmallWithSocial from "../public/styles/footer";
 import ArticleList from "../public/styles/card1";
-import {Botao} from '../public/styles/OwnComponents'
 
-import Link from 'next/link';
+
+
 function Sobre()
 {
   return (

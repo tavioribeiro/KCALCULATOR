@@ -4,10 +4,11 @@ import { Button, Input } from "@chakra-ui/react"
 function Botao(props)
 {
   return(
-    <Button background="green" borderRadius="25" colorScheme="teal" size="sm"
+    <Button background="green" borderRadius="25" colorScheme="teal" size="sm" 
         _hover={{
           background: "white",
           color: "black",
+          
         }}
         _active={{
           background: "white",
@@ -51,7 +52,7 @@ function Botao2(props)
           }}
         >
           {props.texto}
-      </Button>
+    </Button>
   );
 }
 
