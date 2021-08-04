@@ -4,21 +4,17 @@ import ReactDOM from "react-dom";
 import Head from 'next/head'
 
 
-import { ChakraProvider, Button } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
-
-
-
-import Link from 'next/link';
 
 
 import Header from "../public/styles/header";
 import SmallWithSocial from "../public/styles/footer";
+import ArticleList from "../public/styles/card1";
+import {Botao} from '../public/styles/OwnComponents'
 
-
-
-
-function Home()
+import Link from 'next/link';
+function Sobre()
 {
   return (
     <>
@@ -30,23 +26,23 @@ function Home()
       
 
       <div class="container">
+
         <div class="header">
           <ChakraProvider>
-            <Header />
+                <Header />
           </ChakraProvider>
         </div>
+
         <div class="main">
-
-          
-        <ChakraProvider>
-
-        </ChakraProvider>
-
+            <ChakraProvider>
+                <ArticleList/>
+            </ChakraProvider>
         </div>
+
         <div class="footer">
-          <ChakraProvider>
-            <SmallWithSocial />
-          </ChakraProvider>
+            <ChakraProvider>
+                <SmallWithSocial/>
+            </ChakraProvider>
         </div>
       </div>
     </>
@@ -56,4 +52,4 @@ function Home()
 
 
 
-export default Home;
+export default Sobre;

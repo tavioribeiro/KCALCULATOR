@@ -1,7 +1,6 @@
 import { Button, Input } from "@chakra-ui/react"
 
 
-
 function Botao(props)
 {
   return(
@@ -29,7 +28,7 @@ function Botao(props)
 function Botao2(props)
 {
   return(
-    <Button
+      <Button
           background="transparent" borderRadius="25"  size="sm"
           _hover={{
             background: "white",
@@ -50,12 +49,12 @@ function Botao2(props)
             color: "black",
             border: "0px solid"
           }}
-          
-          
         >
-        {props.texto}
-    </Button>
+          {props.texto}
+      </Button>
   );
 }
+
+
 
 export { Botao, Botao2 };

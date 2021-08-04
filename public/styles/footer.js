@@ -61,7 +61,7 @@ import {
 
             <h1 className="titleFooter">KCALCULATOR</h1>
             
-            <Text className="typoG1">
+            <Text className="typoG1" textAlign="center">
               Copyright© 2021, KCALCULATOR. Todos os direitos reservados.
             </Text>
           

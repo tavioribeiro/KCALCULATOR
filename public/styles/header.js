@@ -6,13 +6,15 @@ import {
   Flex,
   Text,
   Button,
-  useDisclosure
+  useDisclosure,
+  Link
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 
+var a = "/sobre";
 
-import {Botao2} from './OwnComponents'
+import {Botao2, Greeting} from './OwnComponents'
 
 // Note: This code could be better,
 // so I'd recommend you to understand how I solved and you could write yours better :)
@@ -54,15 +56,25 @@ const Header = (props) => {
         paddingRight="5%"
         mt={{ base: 4, md: 0 }}
       >
-        <Text>
-            <Botao2 texto="Início"></Botao2>
-        </Text>
-        <Text>
-            <Botao2 texto="Sobre"></Botao2>
-        </Text>
-        <Text>
-            <Botao2 texto="Contribua"></Botao2>
-        </Text>
+
+        <BotaoLink texto="Início" end="/"></BotaoLink>
+        <BotaoLink texto="Sobre" end="/sobre"></BotaoLink>
+        <BotaoLink texto="Contribua" end="/"></BotaoLink>
+
+
+{/*
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <Botao2 texto="Começar"></Botao2>
+        </Link>
+
+        <Link href="/sobre" style={{ textDecoration: 'none' }}>
+          <Botao2 texto="Sobre"></Botao2>
+        </Link>
+          
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <Botao2 texto="Comtribua"></Botao2>
+        </Link>
+*/}
         
       </Stack>
 {/*}
@@ -78,5 +90,37 @@ const Header = (props) => {
     </Flex>
   );
 };
+
+function BotaoLink(props) //   link:/
+{
+  return(
+    <Link href={props.end} style={{ textDecoration: 'none' }}>
+      <Button
+          background="transparent" borderRadius="25"  size="sm"
+          _hover={{
+            background: "white",
+            color: "black",
+          }}
+          _active={{
+            background: "#b0ff29",
+            color: "black",
+            border: "0px solid"
+          }}
+          _focus={{
+            background: "#b0ff29",
+            color: "black",
+            border: "0px solid"
+          }}
+          _focusWithin={{
+            background: "#b0ff29",
+            color: "black",
+            border: "0px solid"
+          }}
+        >
+          {props.texto}
+      </Button>
+    </Link> 
+  );
+}
 
 export default Header;
