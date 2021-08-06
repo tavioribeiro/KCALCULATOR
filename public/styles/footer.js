@@ -10,6 +10,9 @@ import {
   import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { ReactNode } from 'react';
   
+
+  import Link from 'next/link'
+
   var a = "";
   var b = "";
 
@@ -58,8 +61,9 @@ import {
           justify={{ base: 'center', md: 'space-between' }}
           align={{ base: 'center', md: 'center' }}
         >
-
+          <Link href="/">
             <h1 className="titleFooter">KCALCULATOR</h1>
+          </Link>
             
             <Text className="typoG1" textAlign="center">
               Copyright© 2021, KCALCULATOR. Todos os direitos reservados.

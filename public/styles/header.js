@@ -5,11 +5,11 @@ import {
   Flex,
   Button,
   useDisclosure,
-  Link
+  //Link
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-
+import Link from 'next/link'
 
 // Note: This code could be better,
 // so I'd recommend you to understand how I solved and you could write yours better :)
@@ -33,7 +33,10 @@ const Header = (props) => {
       {...props}
     >
       <Flex align="center" mr={5}>
-        <h1 className="title">KCALCULATOR</h1>
+        <Link href="/">
+          <h1 className="title">KCALCULATOR</h1>
+        </Link>
+        
       </Flex>
 
       <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
@@ -89,7 +92,7 @@ const Header = (props) => {
 function BotaoLink(props) //   link:/
 {
   return(
-    <Link href={props.end} style={{ textDecoration: 'none' }}>
+    <Link href={props.end} >
       <Button
           background="transparent" borderRadius="25"  size="sm"
           _hover={{

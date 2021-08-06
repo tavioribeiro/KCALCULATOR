@@ -124,56 +124,46 @@ const Botao2 = ({ onClick, texto, color}) => {
                 background = "tranparent"
                 border="25px"
                 >
-                    <Card></Card>
+                  <Card></Card>
                 </ModalContent>
             </Modal>    
     </>
   );
 }
 
-const Botao3 = ({ onClick, texto, color}) => {
-    
-  const { isOpen, onOpen, onClose } = useDisclosure()
+
+
+
+const Botao3 = ({end, color, texto}) => {
   return(
       <>
-      <Button
-          //onClick={onOpen}
-          //onClick={()=>console.log("sim")}
-          onClick={onClick}
-          background="#7928CA" borderRadius="25"  size="sm" color= {color} border="2px solid #b0ff29"
-          _hover={{
-              background: "white",
-              color: "black",
-          }}
-          _active={{
-              background: "#7928CA",
-              color: "white",
-              border: "0px solid"
-          }}
-          _focus={{
-              background: "#7928CA",
-              color: "white",
-              border: "0px solid"
-          }}
-          _focusWithin={{
-              background: "#7928CA",
-              color: "white",
-              border: "0px solid"
-          }}
-      >
+      <Link href={end} style={{ textDecoration: 'none' }}>
+        <Button
+            background="#7928CA" borderRadius="25"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
+            _hover={{
+                background: "white",
+                color: "black",
+            }}
+            _active={{
+                background: "#7928CA",
+                color: "white",
+                border: "0px solid"
+            }}
+            _focus={{
+                background: "#7928CA",
+                color: "white",
+                border: "0px solid"
+            }}
+            _focusWithin={{
+                background: "#7928CA",
+                color: "white",
+                border: "0px solid"
+            }}
+        >
           {texto}
-          </Button>
-
-          <Modal isOpen={isOpen} onClose={onClose}>
-              <ModalOverlay />
-
-              <ModalContent
-              background = "tranparent"
-              border="25px"
-              >
-                  <Card></Card>
-              </ModalContent>
-          </Modal>    
+        </Button>
+      </Link>
+      
   </>
 );
 }
@@ -216,6 +206,7 @@ const Card = () => {
                 border="0px" 
                 background="white" 
                 color="black"
+                border="2px solid white" 
                 type="email" 
                 _focus={{
                   background: "white",
@@ -232,6 +223,7 @@ const Card = () => {
                 border="0px" 
                 background="white" 
                 color="black"
+                border="2px solid white" 
                 type="password" 
                 _focus={{
                   background: "white",
@@ -255,9 +247,9 @@ const Card = () => {
               </Stack>
               
               <Botao3
-              color="#b0ff29" 
-              texto="Entrar"
-              onClick={()=> console.log("TESTEEE")}
+                color="#b0ff29" 
+                texto="Entrar"
+                end="/dashboard"
               ></Botao3>
             </Stack>
           </Stack>
