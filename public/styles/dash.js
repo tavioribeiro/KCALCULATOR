@@ -1,9 +1,11 @@
 import {
     Avatar,
     Box,
+    Button,
     Collapse,
     Drawer,
     DrawerContent,
+    DrawerFooter,
     DrawerOverlay,
     Flex,
     Icon,
@@ -15,6 +17,7 @@ import {
     useColorModeValue,
     useDisclosure,
   } from "@chakra-ui/react";
+  import { AiFillCloseCircle } from "react-icons/ai";
   import { FaBell, FaClipboardCheck, FaRss } from "react-icons/fa";
   import { AiFillGift } from "react-icons/ai";
   import { BsGearFill } from "react-icons/bs";
@@ -23,10 +26,23 @@ import {
   import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
   import React from "react";
 
+
+  import { useEffect } from 'react';
+  import { useState } from 'react';
   
-  export default function Swibc() {
+  
+  export default function Swibc()
+  {
     const sidebar = useDisclosure();
     const integrations = useDisclosure();
+
+
+    var [nome, setNome] = useState("");
+
+    useEffect(() =>
+    {
+        setNome(sessionStorage.getItem('login'));
+    }, []);
   
     const NavItem = (props) => {
       const { icon, children, ...rest } = props;
@@ -37,10 +53,10 @@ import {
           pl="4"
           py="3"
           cursor="pointer"
-          color={useColorModeValue("black", "white")}
+          color={useColorModeValue("white", "white")}
           _hover={{
             bg: useColorModeValue("#7928CA", "white"),
-            color: useColorModeValue("black", "white"),
+            color: useColorModeValue("white", "white"),
           }}
           role="group"
           fontWeight="semibold"
@@ -52,7 +68,7 @@ import {
               mr="2"
               boxSize="4"
               _groupHover={{
-                color: useColorModeValue("black", "gray.300"),
+                color: useColorModeValue("white", "gray.300"),
               }}
               as={icon}
             />
@@ -73,7 +89,7 @@ import {
         pb="10"
         overflowX="hidden"
         overflowY="auto"
-        bg={useColorModeValue("white", "gray.800")}
+        bg={useColorModeValue("black", "gray.800")}
         borderColor={useColorModeValue("inherit", "gray.700")}
         borderRightWidth="1px"
         w="60"
@@ -81,6 +97,9 @@ import {
       >
         <Flex px="4" py="5" align="center">
           <h1 className="titleFooter">KCALCULATOR</h1>
+        </Flex>
+        <Flex px="4" py="5" align="center">
+          <h6 color="white">Bem vindo {nome}</h6>
         </Flex>
         <Flex
           direction="column"
@@ -117,6 +136,7 @@ import {
         </Flex>
       </Box>
     );
+
     return (
       <Box
         as="section"
@@ -128,12 +148,17 @@ import {
           isOpen={sidebar.isOpen}
           onClose={sidebar.onClose}
           placement="left"
+
         >
-          <DrawerOverlay />
+          {/*<DrawerOverlay />*/}
+          
           <DrawerContent>
             <SidebarContent w="full" borderRight="none" />
           </DrawerContent>
+
+          
         </Drawer>
+        
         <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
           <Flex
             as="header"
@@ -153,26 +178,12 @@ import {
               icon={<FiMenu />}
               size="sm"
             />
-            <InputGroup w="96" display={{ base: "none", md: "flex" }}>
-              <InputLeftElement color="gray.500" children={<FiSearch />} />
-              <Input placeholder="Search for articles..." />
-            </InputGroup>
-  
-            <Flex align="center">
-              <Icon color="gray.500" as={FaBell} cursor="pointer" />
-              <Avatar
-                ml="4"
-                size="sm"
-                name="anubra266"
-                src="https://avatars.githubusercontent.com/u/30869823?v=4"
-                cursor="pointer"
-              />
-            </Flex>
+          
           </Flex>
   
           <Box as="main" p="4">
             {/* Add content here, remove div below  */}
-            <Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96" />
+            
           </Box>
         </Box>
       </Box>
