@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import axios from 'axios';
 
-var server = "http://localhost:3001";
-
+//var server = "http://localhost:3001";
+var server = "https://nodetest15.herokuapp.com";
 
 import {
     chakra, 
@@ -90,6 +90,10 @@ async function search()  // POSSÍVEL TRATAMENTO
                         
       window.open("/dashboard");
       console.log("SIM");
+      window.location.reload();
+
+
+
     }
     else
     {
@@ -318,7 +322,7 @@ function CardLogin ()
 async function search()  // POSSÍVEL TRATAMENTO
 {
   setMensagem("");
-  
+
   var a = document.getElementById('email').value;
   var b = document.getElementById('password').value;
   
