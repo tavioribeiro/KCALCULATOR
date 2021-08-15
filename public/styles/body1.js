@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import axios from 'axios';
 
-var server = "http://localhost:3001";
-//var server = "https://nodetest15.herokuapp.com";
+//var server = "http://localhost:3001";
+var server = "https://nodetest15.herokuapp.com";
 
 import {
     chakra, 
