@@ -193,7 +193,7 @@ import {
           <>
             <Button
               onClick = {() => {sair()}}
-                background="#7928CA" borderRadius="25" marginTop="20px"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
+                background="#7928CA"  borderRadius="25" marginTop="20px"  size="sm" color= {color} border="2px solid #b0ff29" width="80%"
                 _hover={{
                     background: "white",
                     color: "black",
@@ -268,8 +268,8 @@ import {
         overflowX="hidden"
         overflowY="auto"
         bg={useColorModeValue("black", "gray.800")}
-        borderColor={useColorModeValue("inherit", "gray.700")}
-        borderRightWidth="1px"
+        borderColor={useColorModeValue("#b0ff29", "gray.700")}
+        borderRightWidth="0px"
         w="60"
         {...props}
       >
@@ -310,7 +310,10 @@ import {
           <NavItem icon={AiFillGift}>Changelog</NavItem>
           <NavItem icon={BsGearFill}>Settings</NavItem>
 
-          <Botao6 texto="Sair"></Botao6>
+          <Center>
+            <Botao6 texto="Sair"></Botao6>
+          </Center>
+          
         </Flex>
       </Box>
     );
@@ -321,7 +324,7 @@ import {
         as="section"
         bg={useColorModeValue("gray.50", "gray.700")}
         minH="100vh"
-        background="white"
+        background="black"
       >
         <SidebarContent display={{ base: "none", md: "unset" }} />
 
@@ -341,7 +344,7 @@ import {
         <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
 
           <Stack>
-              <Box backgroundColor="#1c1c1c" height="50px">
+              <Box backgroundColor="black" height="50px">
                 <Flex height="100%" direction="row">
                   <Flex align="center" height="100%" flex="1" justify="center" >
                     <Text color="white" margin="5px" className="typoG2">{nomeUsuario}</Text>
@@ -360,7 +363,11 @@ import {
                 </Flex>
               </Box>
               
-              <Box backgroundColor="green">
+
+{/* ----------------------------------------------------------------*/}
+
+
+              <Box backgroundColor="#7928CA">
                 <Flex justify="center">
                   <Flex direction="column"  width="500px">
                               <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
