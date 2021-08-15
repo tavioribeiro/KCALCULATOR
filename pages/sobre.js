@@ -35,7 +35,7 @@ function Sobre()
 
         <div class="main">
             <ChakraProvider>
-                <ArticleList/>
+              <ArticleList/>
             </ChakraProvider>
         </div>
 

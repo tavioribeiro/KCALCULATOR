@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import axios from 'axios';
 
-//var server = "http://localhost:3001";
-var server = "https://nodetest15.herokuapp.com";
+var server = "http://localhost:3001";
+//var server = "https://nodetest15.herokuapp.com";
 
 import {
     chakra, 
@@ -65,50 +65,13 @@ async function search()  // POSSÍVEL TRATAMENTO
 */
 
 
-async function search()  // POSSÍVEL TRATAMENTO
-{
-
-  var a = document.getElementById('email').value;
-  
-  var b = document.getElementById('password').value;
-  
-
-  axios.post
-  (
-    server + "/api/check", 
-    {
-      a: a,
-    }
-  )
-  .then((response)=>{
-    //console.log(response.data.login);
-    console.log(response.data);
-
-    if(response.data != null)
-    {
-      sessionStorage.setItem('login', response.data);
-                        
-      window.open("/dashboard");
-      console.log("SIM");
-      window.location.reload();
-
-
-
-    }
-    else
-    {
-      
-      console.log("Nao");
-    }
-
-  })
-}
-
 //-----------------------------------------------------------------------------------------------------------------
   
+var opcao = 0;
 
 const BodyCard = () =>
 {
+  opcao = 0;
   return (
       <>
     <Flex
@@ -150,26 +113,49 @@ const BodyCard = () =>
 
             <Box mt={8}>
               
-            <Botao2 texto="Começar"></Botao2>
-            {/*<Botao2 onClick={()=>console.log("sim")} texto="Começar"></Botao2>*/}
+              <Botao2 texto="Começar"></Botao2>
+              <Botao3 texto="Entrar"></Botao3>
+
+              {/*<Botao2 onClick={()=>console.log("sim")} texto="Começar"></Botao2>*/}
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
     </>
   );
 };
 
-const Botao2 = ({ onClick, texto, color}) => 
+/*
+function BotoesConta()
+{
+  console.log(sessionStorage.getItem('idUsuario'));
+  if(sessionStorage.getItem('idUsuario')===null)
+  {
+    return[
+      <>
+        <Botao2 texto="Começar"></Botao2>
+        <Botao3 texto="Entrar"></Botao3>
+      </>
+    ]
+  }
+  else{
+    return[
+      <>
+        <Botao3 texto="Entrar"></Botao3>
+      </>
+    ]
+  }
+}
+*/
+
+const Botao2 = ({texto, color}) => 
 {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return(
         <>
         <Button
-            //onClick={onOpen}
-            //onClick={()=>console.log("sim")}
             onClick={onOpen}
-            background="#7928CA" borderRadius="25"  size="sm" color= {color}
+            background="#7928CA" marginRight="5px" borderRadius="25"  size="sm" color= {color}
             _hover={{
                 background: "white",
                 color: "black",
@@ -184,7 +170,59 @@ const Botao2 = ({ onClick, texto, color}) =>
                 color: "white",
                 border: "0px solid"
             }}
-            _focusWithin={{
+        >
+            {texto}
+            </Button>
+
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+
+                <ModalContent
+                background = "tranparent"
+                border="25px"
+                >
+                <CardCreate/>
+                </ModalContent>
+            </Modal>    
+    </>
+  );
+}
+
+
+
+const Botao3 = ({ texto, color}) => 
+{
+  function checkIfIsLogged()
+  {
+    console.log(sessionStorage.getItem('idUsuario'));
+    
+    if(sessionStorage.getItem('idUsuario') === null)
+    {
+      sessionStorage.clear();
+      onOpen2();
+    }
+    else
+    {
+      window.open("/dashboard");
+    }
+  }
+    const { isOpen:isOpen2, onOpen:onOpen2, onClose:onClose2 } = useDisclosure()
+    return(
+        <>
+        <Button
+            onClick={checkIfIsLogged}
+
+            background="#7928CA" marginLeft="5px" borderRadius="25"  size="sm" color= {color}
+            _hover={{
+                background: "white",
+                color: "black",
+            }}
+            _active={{
+                background: "#7928CA",
+                color: "white",
+                border: "0px solid"
+            }}
+            _focus={{
                 background: "#7928CA",
                 color: "white",
                 border: "0px solid"
@@ -193,7 +231,7 @@ const Botao2 = ({ onClick, texto, color}) =>
             {texto}
             </Button>
 
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen2} onClose={onClose2}>
                 <ModalOverlay />
 
                 <ModalContent
@@ -211,39 +249,6 @@ const Botao2 = ({ onClick, texto, color}) =>
 
 
 
-const Botao3 = ({end, color, texto}) => {
-  return(
-      <>
-      <Link href={end} style={{ textDecoration: 'none' }}>
-        <Button
-            background="#7928CA" borderRadius="25"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
-            _hover={{
-                background: "white",
-                color: "black",
-            }}
-            _active={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-            _focus={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-            _focusWithin={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-        >
-          {texto}
-        </Button>
-      </Link>
-      
-  </>
-);
-}
 
 const Botao4 = ({onClick, color, texto}) => {
   return(
@@ -277,6 +282,9 @@ const Botao4 = ({onClick, color, texto}) => {
   </>
 );
 }
+
+
+
 
 
 
@@ -316,8 +324,19 @@ function CardLogin ()
     })
   }
 */
+/*
+var currentdate = new Date(); 
 
-
+var datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+*/
+var currentdate = new Date("Wed Aug 11 2021 19:56:35 GMT-0300 (Horário Padrão de Brasília)"); 
+//console.log(currentdate);
+//console.log(currentdate.getSeconds());
 
 async function search()  // POSSÍVEL TRATAMENTO
 {
@@ -342,8 +361,10 @@ async function search()  // POSSÍVEL TRATAMENTO
       }
       else
       {
-        //console.log(response.data);
-        sessionStorage.setItem('login', response.data);            
+        sessionStorage.clear();
+        sessionStorage.setItem('origem', 2);
+        sessionStorage.setItem('idUsuario', response.data.id);
+        sessionStorage.setItem('nome', response.data.nome);             
         window.open("/dashboard");
         setMensagem("");
       } 
@@ -353,7 +374,7 @@ async function search()  // POSSÍVEL TRATAMENTO
       //console.log(response.data);
       setMensagem("Usuário não cadastrado!");
     }
-    console.log(response.data);
+    //console.log(response.data);
   })
 }
 
@@ -453,8 +474,91 @@ async function search()  // POSSÍVEL TRATAMENTO
 
 
 
+const Botao5 = ({onClick, color, texto}) =>
+{
+  return(
+      <>
+        <Button
+          onClick = {onClick}
+            background="#7928CA" borderRadius="25" marginTop="20px"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
+            _hover={{
+                background: "white",
+                color: "black",
+            }}
+            _active={{
+                background: "#7928CA",
+                color: "white",
+                border: "0px solid"
+            }}
+            _focus={{
+                background: "#7928CA",
+                color: "white",
+                border: "0px solid"
+            }}
+            _focusWithin={{
+                background: "#7928CA",
+                color: "white",
+                border: "0px solid"
+            }}
+        >
+          {texto}
+        </Button>
+      
+  </>
+);
+}
+
+
+
 const CardCreate = () => {
+
+  var [mensagem, setMensagem] = useState("");
+
+  async function create()  // POSSÍVEL TRATAMENTO
   {
+    setMensagem("");
+
+    var a = document.getElementById('email').value;
+    var b = document.getElementById('password').value;
+    var c = document.getElementById('nome').value;
+    
+    axios.post
+    (
+      server + "/api/create", 
+      {
+        a: a,
+        b: b,
+        c: c
+      }
+    ).then((response)=>{
+      if(response.data != 0)
+      {
+        if(response.data === 1)
+        {
+          setMensagem("Senha incoreta!");
+        }
+        else
+        {
+          sessionStorage.clear();
+          //console.log(response.data);
+          sessionStorage.setItem('origem', 1);
+          sessionStorage.setItem('idUsuario', response.data.b);  
+          sessionStorage.setItem('nome', response.data.a);             
+          window.open("/dashboard");
+          setMensagem("");
+        } 
+      }
+      else
+      {
+        //console.log(response.data);
+        setMensagem("Usuário já cadastrado!");
+      }
+      console.log(response.data);
+    })
+  }
+
+
+  
     return (
       <Flex
         minH={'50vh'}
@@ -469,7 +573,7 @@ const CardCreate = () => {
           
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
-            <Heading color="white" fontSize={'4xl'}>Fazer Login</Heading>
+            <Heading color="white" fontSize={'4xl'}>Cadastrar</Heading>
             <Text fontSize={'lg'} color={'white'}>
               para aproveitar todos os <Link fontWeight="bold" color={'#b0ff29'}>recursos</Link> ✌️
             </Text>
@@ -482,6 +586,24 @@ const CardCreate = () => {
             color="white"
             p={8}>
             <Stack spacing={4}>
+              
+            <FormControl id="nome">
+                <FormLabel>Nome</FormLabel>
+                <Input 
+                  rounded="25px" 
+                  border="0px" 
+                  background="white" 
+                  color="black"
+                  border="2px solid white" 
+                  type="email" 
+                  _focus={{
+                    background: "white",
+                    color: "black",
+                    border:"2px solid #b0ff29" 
+                  }}
+              />
+              </FormControl>
+
               <FormControl id="email">
                 <FormLabel>Login</FormLabel>
                 <Input 
@@ -490,15 +612,15 @@ const CardCreate = () => {
                   background="white" 
                   color="black"
                   border="2px solid white" 
-                  type="login" 
+                  type="email" 
                   _focus={{
                     background: "white",
                     color: "black",
                     border:"2px solid #b0ff29" 
                   }}
-                />
-  
+              />
               </FormControl>
+                
               <FormControl id="password">
                 <FormLabel>Senha</FormLabel>
                 <Input 
@@ -516,27 +638,18 @@ const CardCreate = () => {
                 />
               </FormControl>
               <Stack spacing={10}>
-                <Stack
-                  direction={{ base: 'column', sm: 'row' }}
-                  align={'start'}
-                  justify={'space-between'}>
-                  <Checkbox
-                  iconColor="#b0ff29"
-                  border="0px"
-                  colorScheme="white">
-                    Lembrar
-                  </Checkbox>
-                  <Link color={'#b0ff29'}>Esqueceu a senha?</Link>
-                </Stack>
-  
+                
+                <Center>
+                  <Text fontSize="15px" color="#b0ff29">{mensagem}</Text>
+                </Center>
                 
                 
-                <Botao4
+                <Botao5
                   color="#b0ff29" 
-                  texto="Entrar"
+                  texto="Cadastrar"
                   //end="/dashboard"
-                  onClick={() => search()}
-                ></Botao4>
+                  onClick={() => create()}
+                ></Botao5>
               </Stack>
             </Stack>
           </Box>
@@ -544,9 +657,5 @@ const CardCreate = () => {
       </Flex>
     );
   }
-  }
   
-
-
-
 export default BodyCard;

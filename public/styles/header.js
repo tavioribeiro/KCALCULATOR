@@ -5,6 +5,7 @@ import {
   Flex,
   Button,
   useDisclosure,
+  Text,
   //Link
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
@@ -55,10 +56,18 @@ const Header = (props) => {
         mt={{ base: 4, md: 0 }}
       >
 
-        <BotaoLink texto="Início" end="/"></BotaoLink>
-        <BotaoLink texto="Sobre" end="/sobre"></BotaoLink>
-        <BotaoLink texto="Contribua" end="/"></BotaoLink>
+        <Text>
+          <BotaoLink texto="Início" end="/"></BotaoLink>
+        </Text>
 
+        <Text>
+          <BotaoLink texto="Sobre" end="/sobre"></BotaoLink>
+        </Text>
+        
+        <Text>
+          <BotaoLink texto="Contribua" end="/"></BotaoLink>
+        </Text>
+        
 
 {/*
         <Link href="/" style={{ textDecoration: 'none' }}>

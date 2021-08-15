@@ -1,21 +1,27 @@
 import {
-    Avatar,
     Box,
-    Button,
     Collapse,
     Drawer,
+    Heading,
     DrawerContent,
-    DrawerFooter,
-    DrawerOverlay,
     Flex,
     Icon,
     IconButton,
-    Input,
-    InputGroup,
-    InputLeftElement,
-    Text,
     useColorModeValue,
     useDisclosure,
+    Stack,
+    Link,
+    FormControl,
+    FormLabel,
+    Select,
+    VisuallyHidden,
+    Input,
+    Button,
+    HStack,
+    Radio,
+    Center,
+    Square,
+    Text,
   } from "@chakra-ui/react";
   import { AiFillCloseCircle } from "react-icons/ai";
   import { FaBell, FaClipboardCheck, FaRss } from "react-icons/fa";
@@ -26,23 +32,195 @@ import {
   import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
   import React from "react";
 
+  import LineChart from './chart';
 
   import { useEffect } from 'react';
   import { useState } from 'react';
-  
+
+  import SmallWithSocial from "./footer";
+  import axios from 'axios';
+  var server = "http://localhost:3001";
   
   export default function Swibc()
   {
+    var [nomeUsuario, setnomeUsuario] = useState("");
+    var origem = "";
+    
+    useEffect(() =>
+    {
+      setnomeUsuario(sessionStorage.getItem('nome'));
+      origem = sessionStorage.getItem('origem');
+      
+      console.log(origem);
+      console.log(sessionStorage.getItem('nome'));
+      console.log(sessionStorage.getItem('idUsuario'));
+      
+    }, []);
+
+    async function postuserdata() 
+    {
+      origem = sessionStorage.getItem('origem').toString();
+      console.log("CLICK");
+      if(origem === "1")
+      {
+        console.log("AAAAA");
+        axios.post
+        (
+          server + "/api/postuserdata", 
+          {
+            a: sessionStorage.getItem('idUsuario'),
+            b: sessionStorage.getItem('nome'),
+            c: document.getElementById('idade').value,
+            d: document.getElementById('sexo').value,
+            e: document.getElementById('peso').value,
+            f: document.getElementById('altura').value,
+            g: document.getElementById('abdomem').value,
+            h: document.getElementById('pescoco').value,
+            i: document.getElementById('quadril').value,
+            j: document.getElementById('nivelatividade').value,
+            k: document.getElementById('objetivo').value,
+          }
+        ).then((response)=>{
+          if(response.data != 0)
+          {
+            if(response.data === 1)
+            {
+              console.log("erro 1");
+            }
+            else
+            {
+              origem = "2";
+              sessionStorage.setItem('origem', 2);
+              console.log("sucesso");
+            } 
+          }
+          else
+          {
+            console.log("erro 2");
+          }
+          console.log(response.data);
+        })
+      }
+      if(origem === "2")
+      {
+        console.log("BBBBB");
+        axios.post
+        (
+          server + "/api/updateuserdata", 
+          {
+            a: sessionStorage.getItem('idUsuario'),
+            b: sessionStorage.getItem('nome'),
+            c: document.getElementById('idade').value,
+            d: document.getElementById('sexo').value,
+            e: document.getElementById('peso').value,
+            f: document.getElementById('altura').value,
+            g: document.getElementById('abdomem').value,
+            h: document.getElementById('pescoco').value,
+            i: document.getElementById('quadril').value,
+            j: document.getElementById('nivelatividade').value,
+            k: document.getElementById('objetivo').value,
+          }
+        ).then((response)=>{
+          if(response.data != 0)
+          {
+            if(response.data === 1)
+            {
+              console.log("erro 1");
+            }
+            else
+            {
+              console.log("sucesso");
+            } 
+          }
+          else
+          {
+            console.log("erro 2");
+          }
+          console.log(response.data);
+        })
+      }
+    }
+
+    //================================================================
     const sidebar = useDisclosure();
     const integrations = useDisclosure();
 
 
-    var [nome, setNome] = useState("");
-
-    useEffect(() =>
+    const Botao5 = ({onClick, color, texto}) =>
     {
-        setNome(sessionStorage.getItem('login'));
-    }, []);
+      return(
+          <>
+            <Button
+              onClick = {onClick}
+                background="#7928CA" borderRadius="25" marginTop="20px"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
+                _hover={{
+                    background: "white",
+                    color: "black",
+                }}
+                _active={{
+                    background: "#7928CA",
+                    color: "white",
+                    border: "0px solid"
+                }}
+                _focus={{
+                    background: "#7928CA",
+                    color: "white",
+                    border: "0px solid"
+                }}
+                _focusWithin={{
+                    background: "#7928CA",
+                    color: "white",
+                    border: "0px solid"
+                }}
+            >
+              {texto}
+            </Button>
+          
+      </>
+    );
+    }
+
+
+    const Botao6 = ({color, texto}) =>
+    {
+      async function sair()
+      {
+        sessionStorage.clear();          
+        window.open("/");
+        window.close();
+      }
+      return(
+          <>
+            <Button
+              onClick = {() => {sair()}}
+                background="#7928CA" borderRadius="25" marginTop="20px"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
+                _hover={{
+                    background: "white",
+                    color: "black",
+                }}
+                _active={{
+                    background: "#7928CA",
+                    color: "white",
+                    border: "0px solid"
+                }}
+                _focus={{
+                    background: "#7928CA",
+                    color: "white",
+                    border: "0px solid"
+                }}
+                _focusWithin={{
+                    background: "#7928CA",
+                    color: "white",
+                    border: "0px solid"
+                }}
+            >
+              {texto}
+            </Button>
+          
+      </>
+    );
+    }
+    
   
     const NavItem = (props) => {
       const { icon, children, ...rest } = props;
@@ -98,9 +276,7 @@ import {
         <Flex px="4" py="5" align="center">
           <h1 className="titleFooter">KCALCULATOR</h1>
         </Flex>
-        <Flex px="4" py="5" align="center">
-          <h6 color="white">Bem vindo {nome}</h6>
-        </Flex>
+        
         <Flex
           direction="column"
           as="nav"
@@ -133,17 +309,22 @@ import {
           </Collapse>
           <NavItem icon={AiFillGift}>Changelog</NavItem>
           <NavItem icon={BsGearFill}>Settings</NavItem>
+
+          <Botao6 texto="Sair"></Botao6>
         </Flex>
       </Box>
     );
 
     return (
+      
       <Box
         as="section"
         bg={useColorModeValue("gray.50", "gray.700")}
         minH="100vh"
+        background="white"
       >
         <SidebarContent display={{ base: "none", md: "unset" }} />
+
         <Drawer
           isOpen={sidebar.isOpen}
           onClose={sidebar.onClose}
@@ -155,37 +336,287 @@ import {
           <DrawerContent>
             <SidebarContent w="full" borderRight="none" />
           </DrawerContent>
-
-          
         </Drawer>
         
         <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
-          <Flex
-            as="header"
-            align="center"
-            justify="space-between"
-            w="full"
-            px="4"
-            bg={useColorModeValue("white", "gray.800")}
-            borderBottomWidth="1px"
-            borderColor={useColorModeValue("inherit", "gray.700")}
-            h="14"
-          >
-            <IconButton
-              aria-label="Menu"
-              display={{ base: "inline-flex", md: "none" }}
-              onClick={sidebar.onOpen}
-              icon={<FiMenu />}
-              size="sm"
-            />
-          
-          </Flex>
-  
-          <Box as="main" p="4">
-            {/* Add content here, remove div below  */}
+
+          <Stack>
+              <Box backgroundColor="#1c1c1c" height="50px">
+                <Flex height="100%" direction="row">
+                  <Flex align="center" height="100%" flex="1" justify="center" >
+                    <Text color="white" margin="5px" className="typoG2">{nomeUsuario}</Text>
+                  </Flex>
+
+                  <Flex height="100%" justify="center" align="center">
+                    <IconButton
+                      margin="5px"
+                      aria-label="Menu"
+                      display={{ base: "inline-flex", md: "none" }}
+                      onClick={sidebar.onOpen}
+                      icon={<FiMenu />}
+                      size="sm"
+                    />
+                  </Flex>
+                </Flex>
+              </Box>
+              
+              <Box backgroundColor="green">
+                <Flex justify="center">
+                  <Flex direction="column"  width="500px">
+                              <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                      <Stack align={'center'}>
+                        <Heading textAlign="center" color="white" fontSize={'4xl'}>Completar perfil</Heading>
+                        <Text fontSize="16px" color={'white'} textAlign="center">
+                          Esses dados serão utilizados para calcular os índices
+                        </Text>
+                      </Stack>
+                      <Box
+                        rounded={'lg'}
+                        bg={useColorModeValue('rgba( 0, 0, 0, 1 )', 'gray.700')}
+                        boxShadow="0 0 5px black"
+                        rounded="25px"
+                        color="white"
+                        p={8}>
+                        <Stack spacing={4}>
+                          
+                        <FormControl id="idade">
+                            <FormLabel>Idade</FormLabel>
+                            <Input 
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                          />
+                          </FormControl>
+
+                          <FormControl id="sexo">
+                            <FormLabel>Sexo</FormLabel>
+                            <Select
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                              placeholder="Selecionar">
+                              <option backgroundColor="blue" >Masculino</option>
+                              <option>Feminino</option>
+                            </Select>
+                          </FormControl>
+                          
+                          <FormControl id="peso">
+                            <FormLabel>Peso</FormLabel>
+                            <Input 
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                          />
+                          </FormControl>
+
+                          <FormControl id="altura">
+                            <FormLabel>Altura</FormLabel>
+                            <Input 
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                          />
+                          </FormControl>
+
+                          <FormControl id="abdomem">
+                            <FormLabel>Abdomem</FormLabel>
+                            <Input 
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                          />
+                          </FormControl>
+
+                          <FormControl id="pescoco">
+                            <FormLabel>Pescoço</FormLabel>
+                            <Input 
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                          />
+                          </FormControl>
+
+                          <FormControl id="quadril">
+                            <FormLabel>Quadril</FormLabel>
+                            <Input 
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                          />
+                          </FormControl>
+                          
+                          <FormControl id="nivelatividade">
+                            <FormLabel>Nivel de Atividade</FormLabel>
+                            <Select
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                              placeholder="Selecionar">
+                              <option>Sedentário</option>
+                              <option>Baixo</option>
+                              <option>Moderado</option>
+                              <option>Alto</option>
+                              <option>Atleta</option>
+                            </Select>
+                          </FormControl>
+
+                          <FormControl id="objetivo">
+                            <FormLabel>Objetivo</FormLabel>
+                            <Select
+                              height="30px"
+                              fontSize="16px"
+                              rounded="25px" 
+                              border="0px" 
+                              background="white" 
+                              color="black"
+                              border="2px solid white" 
+                              type="email" 
+                              _focus={{
+                                background: "white",
+                                color: "black",
+                                border:"2px solid #b0ff29" 
+                              }}
+                              placeholder="Selecionar">
+                              <option>Perder peso</option>
+                              <option>Manter peso</option>
+                              <option>Ganhar peso</option>
+                            </Select>
+                          </FormControl>
+                          
+                          <Stack spacing={10}>
+
+                            
+                            <Botao5
+                              color="#b0ff29" 
+                              texto="Finalizar"
+                              //end="/dashboard"
+                              onClick={() => postuserdata()}
+                            ></Botao5>
+                          </Stack>
+                        </Stack>
+                      </Box>
+                    </Stack>
+                  </Flex>
+                </Flex>
+              </Box>
             
-          </Box>
+          </Stack>
+
+          {/* 
+          <div class="container3">
+            <div class="header3">
+              <div className="content-hearder31">
+                <p className="typoG2">Bem vindo {nome}</p>
+              </div>
+              
+              <div className="content-hearder32">
+                <IconButton
+                  margin="5px"
+                  aria-label="Menu"
+                  display={{ base: "inline-flex", md: "none" }}
+                  onClick={sidebar.onOpen}
+                  icon={<FiMenu />}
+                  size="sm"
+                />
+              </div>
+              
+            </div>
+            <div class="main3">
+
+            </div>
+            <div class="footer3">
+
+            </div>
+          </div>
+
+          */}          
+          
         </Box>
       </Box>
+
+      
     );
   }
+
+
+  

@@ -6,6 +6,7 @@ import Head from 'next/head'
 import { ChakraProvider } from "@chakra-ui/react";
 import Swibc from '../public/styles/dash';
 
+
 function Dashboard()
 {
   return (
