@@ -82,6 +82,9 @@ import { ChatIcon } from "@chakra-ui/icons";
 
     var [imc, setImc] = useState(0);
 
+    var peso = 0;
+    var altura = 0;
+    
     /*
 
     //----------------------- Perfil -----------------------
