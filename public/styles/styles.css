@@ -234,15 +234,42 @@
 .box14
 {
     grid-area: box14;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
+    /*background-color: aqua;*/
 }
   
 .box24 
 {
     grid-area: box24;
-
-    min-height: 100vh;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    /*min-height: 100vh;*/
+    /*background-color: chartreuse;*/
 }
+
+
+@media screen and (min-width: 0px) and (max-width: 900px)
+{
+    .container4
+    {
+        display: flex;
+        flex-direction: column;
+    }
+    .box14
+    {
+        /*background-color: aqua;*/
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+    }
+    
+    .box24 
+    {
+        /*background-color: chartreuse;*/
+        margin-bottom: 50px;
+        padding-bottom: 50px;
+    }
+}
+
   /*-------------------------------------------*/
 
 .parent3 
@@ -271,3 +298,9 @@
 {
     grid-area: 4 / 1 / 5 / 6;
 }
+
+
+
+
+
+

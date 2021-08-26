@@ -71,6 +71,8 @@ var opcao = 0;
 
 const BodyCard = () =>
 {
+  console.log("versão alpha: 0.1 ");
+  
   opcao = 0;
   return (
       <>

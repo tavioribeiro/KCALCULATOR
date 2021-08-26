@@ -73,14 +73,76 @@ import { ChatIcon } from "@chakra-ui/icons";
   
   export default function Swibc()
   {
-    console.log("versão alpha: 0.1 ")
+    console.log("versão alpha: 0.1 ");
     var [nomeUsuario, setnomeUsuario] = useState("");
     var [mensagem1, setnomeMensagem1] = useState("");
     var [idUsuario, setIdUsuario] = useState("");
     var [pagina, setPagina] = useState(0);
 
 
-   
+    var [imc, setImc] = useState(0);
+
+    /*
+
+    //----------------------- Perfil -----------------------
+    var nome_perfil_g;
+    var massa_perfil_g;
+    var altura_perfil_g;
+    var idade_perfil_g;
+    var abdomem_perfil_g;
+    var pescoco_perfil_g;
+    var quadril_perfil_g;
+    var sexo_perfil_g; // M = 1 / F = 2
+
+    var dropButton_atividade_perfil_g = 'one';
+    var dropButton_objetivo_perfil_g = 'one';
+
+    var imc_perfil_g = 0;
+    var tmb_perfil_g = 0;
+    var lbm_perfil_g = 0;
+    var gc_perfil_g = 0;
+    var tdee_perfil_g = 0;
+      var tdee_perfil_mensage_g = 'Não informado ainda';
+    var pmm_perfil_g = 0;
+      var pmm_perfil_10_g = 0;
+      var pmm_perfil_15_g = 0;
+    
+    var min_pi_perfil_g = 0;
+    var max_pi_perfil_g = 0;
+    
+
+    //imc chart-----------------------------
+      var min_imc_chart_perfil_g = 0;
+      var max_imc_chart_perfil_g = 0;
+      var dif_imc_char_perfil_g = 0;
+    //
+
+    //gc chart-----------------------------
+      var min_gc_chart_perfil_g = 0;
+      var max_gc_chart_perfil_g = 0;
+      var dif_gc_char_perfil_g = 0;
+    //
+
+    //macros -----------------------------
+      var resultado_macro_LP_perfil_g = 0;
+      var resultado_macro_LF_perfil_g = 0;
+      var resultado_macro_LC_perfil_g = 0;
+
+      var resultado_macro_MP_perfil_g = 0;
+      var resultado_macro_MF_perfil_g = 0;
+      var resultado_macro_MC_perfil_g = 0;
+
+      var resultado_macro_HP_perfil_g = 0;
+      var resultado_macro_HF_perfil_g = 0;
+      var resultado_macro_HC_perfil_g = 0;
+
+      var resultado_goal_perfil_g = "Sem medição ainda";
+    //
+*/
+    var tmb_perfil_mensage_g;
+    var imc_perfil_mensage_g;
+
+
 
     var [label, setLabel] = useState(new Array());
     var [data, setData] = useState(new Array());
@@ -134,6 +196,9 @@ import { ChatIcon } from "@chakra-ui/icons";
             }
             else
             {
+              peso = document.getElementById('peso').value;
+              altura = document.getElementById('altura').value;
+
               respostaPerfil = response.data;
               console.log(respostaPerfil);
               podePegarDados = 0;
@@ -172,6 +237,9 @@ import { ChatIcon } from "@chakra-ui/icons";
         ).then((response)=>{
           if(response.data != 0)
           {
+            peso = document.getElementById('peso').value;
+            altura = document.getElementById('altura').value;
+
             if(response.data === 1)
             {
               setnomeMensagem1("Não foi possível atualizar os dados!");
@@ -235,8 +303,8 @@ import { ChatIcon } from "@chakra-ui/icons";
         server + "/api/postvalues", 
         {
           a: sessionStorage.getItem('idUsuario'),
-          b: Math.floor(Math.random() * 40),
-          //b: calcularImc(),
+          //b: Math.floor(Math.random() * 40),
+          b: calcularImc(),
           c: new Date()
         }
       ).then((response)=>{
@@ -543,9 +611,24 @@ import { ChatIcon } from "@chakra-ui/icons";
 
     function calcularImc()
     {
-      return 41;
+      var result = (peso / (altura * altura)) * 10000;
+      console.log(result);
+      return result;
     }
 
+
+    function gcPerfil()
+    { 
+      if(sexo_perfil_g == 1)
+      {
+        gc_perfil_g = (495 / ( 1.0324 - 0.19077 * (log(abdomem_perfil_g - pescoco_perfil_g) / log(10)) + 0.15456 * (log(altura_perfil_g) / log(10))) - 450);
+      }
+
+      if(sexo_perfil_g == 2)
+      { 
+        gc_perfil_g = (495 / ( 1.29579 - 0.35004 * (log(abdomem_perfil_g + quadril_perfil_g - pescoco_perfil_g) / log(10)) + 0.22100 * (log(altura_perfil_g) / log(10))) - 450);
+      }
+    }
 
     function generateCharts()
     {
@@ -561,6 +644,11 @@ import { ChatIcon } from "@chakra-ui/icons";
         var currentdate = new Date(respostaDados[i].data); 
         tempLabel.push(currentdate.getHours() + ":" + currentdate.getMinutes());
         tempData.push(respostaDados[i].imc);
+
+        if(i === respostaDados.length - 1)
+        {
+          setImc(respostaDados[i].imc);
+        }
       }
 
       setLabel(tempLabel);
@@ -592,7 +680,7 @@ import { ChatIcon } from "@chakra-ui/icons";
           labels: label,
           datasets: [
             {
-              label: 'índice',
+              label: 'Índice',
               data: data,
               fill: false,
               backgroundColor: 'rgb(255, 255, 255)',
@@ -610,7 +698,7 @@ import { ChatIcon } from "@chakra-ui/icons";
           {
             legend:
             {
-              display: true,
+              display: false,
               labels:
               {
                 color: 'white',
@@ -619,10 +707,17 @@ import { ChatIcon } from "@chakra-ui/icons";
 
             title:
             {
+              fullSize:true,
               display: true,
               text: 'IMC',
-              fontSize:"20px",
+            
               color: 'white',
+            },
+
+            subtitle:
+            {
+              display: true,
+              text: 'Seu histórico de resultados',
             },
           },
 
@@ -669,7 +764,7 @@ import { ChatIcon } from "@chakra-ui/icons";
        
 
         return [
-          <Box height="100vh" backgroundColor="#7928CA">
+          <Box min-height="100vh" backgroundColor="#7928CA">
             <div className="container4">
               <div className="box14">
                 <Box>
@@ -705,13 +800,7 @@ import { ChatIcon } from "@chakra-ui/icons";
                               <Tbody>
                                 <Tr>
                                   <Td textAlign="center">IMC</Td>
-                                  <Td textAlign="center">{calcularImc()}</Td>
-                    
-                                </Tr>
-                                <Tr>
-                                  <Td textAlign="center">IMC</Td>
-                                  <Td textAlign="center">bla</Td>
-                              
+                                  <Td textAlign="center">{imc}</Td>
                                 </Tr>
                                 
                               </Tbody>
