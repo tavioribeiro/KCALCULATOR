@@ -770,13 +770,13 @@ import { ChatIcon } from "@chakra-ui/icons";
               <div className="box14">
                 <Box
                 margin="20px"
-                width="90%"
+                width="95%"
                   rounded="25px"
                   bg={useColorModeValue('black', 'gray.700')}
                   rounded="25px"
                   border="2px solid #b0ff29"
                   color="white"
-                  p={8}>
+                  p={5}>
                   
                   <Stack align={'center'}>
                     <Box marginTop="5px" marginBottom="20px">
@@ -794,11 +794,11 @@ import { ChatIcon } from "@chakra-ui/icons";
 
                     <Box
                       marginTop="205px"
-                      width="95%"
+                      width="100%"
                         
                         p={8}>
 
-                          <Flex justify="center">
+                          <Flex width="100%" justify="center">
                             <Table size="sm" color="black">
                               <Thead>
                                 <Tr>
@@ -808,8 +808,28 @@ import { ChatIcon } from "@chakra-ui/icons";
                               </Thead>
                               <Tbody>
                                 <Tr>
-                                  <Td color="white" textAlign="center">IMC</Td>
+                                  <Td color="white" textAlign="center">Índice de Massa Corporal</Td>
                                   <Td color="white" textAlign="center">{imc}</Td>
+                                </Tr>
+
+                                <Tr>
+                                  <Td color="white" textAlign="center">Gasto Energético Diário</Td>
+                                  <Td color="white" textAlign="center">não disponível</Td>
+                                </Tr>
+
+                                <Tr>
+                                  <Td color="white" textAlign="center">Gordura Corporal</Td>
+                                  <Td color="white" textAlign="center">não disponível</Td>
+                                </Tr>
+
+                                <Tr>
+                                  <Td color="white" textAlign="center">Taxa Metabólica Basal</Td>
+                                  <Td color="white" textAlign="center">não disponível</Td>
+                                </Tr>
+
+                                <Tr>
+                                  <Td color="white" textAlign="center">Peso Ideal</Td>
+                                  <Td color="white" textAlign="center">não disponível</Td>
                                 </Tr>
                                 
                               </Tbody>
