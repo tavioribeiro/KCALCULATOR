@@ -73,7 +73,7 @@ import { ChatIcon } from "@chakra-ui/icons";
   
   export default function Swibc()
   {
-    console.log("versão alpha: 0.1 ");
+    console.log("versão alpha: 0.2 ");
     var [nomeUsuario, setnomeUsuario] = useState("");
     var [mensagem1, setnomeMensagem1] = useState("");
     var [idUsuario, setIdUsuario] = useState("");
@@ -686,9 +686,9 @@ import { ChatIcon } from "@chakra-ui/icons";
               label: 'Índice',
               data: data,
               fill: false,
-              backgroundColor: 'rgb(255, 255, 255)',
+              backgroundColor: '#b0ff29',
               borderColor: 'rgba(255, 255, 255, 0.5)',
-              color: 'rgba(255, 255, 255, 0.5)',
+              //color: 'rgba(255, 255, 255, 0.5)',
               
             },
             
@@ -711,7 +711,7 @@ import { ChatIcon } from "@chakra-ui/icons";
             title:
             {
               fullSize:true,
-              display: true,
+              display: false,
               text: 'IMC',
             
               color: 'white',
@@ -719,7 +719,7 @@ import { ChatIcon } from "@chakra-ui/icons";
 
             subtitle:
             {
-              display: true,
+              display: false,
               text: 'Seu histórico de resultados',
             },
           },
@@ -744,8 +744,6 @@ import { ChatIcon } from "@chakra-ui/icons";
               }
             },
           },
-
-      
         };
         
 
@@ -770,40 +768,48 @@ import { ChatIcon } from "@chakra-ui/icons";
           <Box min-height="100vh" backgroundColor="#7928CA">
             <div className="container4">
               <div className="box14">
-                <Box>
+                <Box
+                margin="20px"
+                width="90%"
+                  rounded="25px"
+                  bg={useColorModeValue('black', 'gray.700')}
+                  rounded="25px"
+                  border="2px solid #b0ff29"
+                  color="white"
+                  p={8}>
                   
                   <Stack align={'center'}>
-                    <Box marginTop="25px" marginBottom="25px">
+                    <Box marginTop="5px" marginBottom="20px">
                       <Stack align={'center'}>
                           <Heading textAlign="center" color="white" fontSize={'4xl'}>Estatísticas</Heading>
-                            <Text fontSize="16px" color={'white'} textAlign="center">
+                            <Text fontSize="15px" color={'white'} textAlign="center">
                               Esses dados foram calculados a partir dos valores da aba Perfil
                             </Text>
                         </Stack>
                     </Box>
+
+                    <Box width="100%" height="1px" backgroundImage="linear-gradient(to right, rgba(0, 0, 0, 0), #b0ff29, rgba(0, 0, 0, 0))">
                     
+                    </Box>
+
                     <Box
                       marginTop="205px"
                       width="95%"
-                        rounded="25px"
-                        bg={useColorModeValue('white', 'gray.700')}
-                        rounded="25px"
-                        border="2px solid #b0ff29"
-                        color="white"
+                        
                         p={8}>
 
                           <Flex justify="center">
                             <Table size="sm" color="black">
                               <Thead>
                                 <Tr>
-                                  <Th color="#7928CA" textAlign="center">Índices</Th>
-                                  <Th color="#7928CA" textAlign="center">Valores</Th>
+                                  <Th color="#b0ff29" textAlign="center">Índices</Th>
+                                  <Th color="#b0ff29" textAlign="center">Valores</Th>
                                 </Tr>
                               </Thead>
                               <Tbody>
                                 <Tr>
-                                  <Td textAlign="center">IMC</Td>
-                                  <Td textAlign="center">{imc}</Td>
+                                  <Td color="white" textAlign="center">IMC</Td>
+                                  <Td color="white" textAlign="center">{imc}</Td>
                                 </Tr>
                                 
                               </Tbody>
@@ -821,7 +827,9 @@ import { ChatIcon } from "@chakra-ui/icons";
                 <div className="parent3">
                   <div className="div1-3">
                     <Flex justify="center">
-                      <Box width="80%" borderRadius="25px" border="2px solid #b0ff29" backgroundColor="black" margin="20px" padding="5px">
+                      <Box width="90%" borderRadius="25px" border="2px solid #b0ff29" backgroundColor="black" margin="20px" padding="5px">
+                        <h1 className='titleIndice'>IMC</h1>
+                        <p className='titleSubIndice'>Seu histórico de resultados</p>
                         <Line data={dataChart} options={optionsChart} />
                       </Box>
                     </Flex>
