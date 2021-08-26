@@ -559,6 +559,26 @@ import { ChatIcon } from "@chakra-ui/icons";
 
                   <Flex height="100%" justify="center" align="center">
                     <IconButton
+                    backgroundColor="black" borderRadius="5" marginTop="20px"  size="sm" color= "#7928CA" border="2px solid #b0ff29" width="100%"
+                    _hover={{
+                        background: "white",
+                        color: "black",
+                    }}
+                    _active={{
+                        background: "#7928CA",
+                        color: "white",
+                        border: "0px solid"
+                    }}
+                    _focus={{
+                        background: "#7928CA",
+                        color: "white",
+                        border: "0px solid"
+                    }}
+                    _focusWithin={{
+                        background: "#7928CA",
+                        color: "white",
+                        border: "0px solid"
+                    }}
                       margin="5px"
                       aria-label="Menu"
                       display={{ base: "inline-flex", md: "none" }}
@@ -769,14 +789,14 @@ import { ChatIcon } from "@chakra-ui/icons";
             <div className="container4">
               <div className="box14">
                 <Box
-                margin="20px"
+                margin="10px"
                 width="95%"
                   rounded="25px"
                   bg={useColorModeValue('black', 'gray.700')}
                   rounded="25px"
                   border="2px solid #b0ff29"
                   color="white"
-                  p={5}>
+                  p={3}>
                   
                   <Stack align={'center'}>
                     <Box marginTop="5px" marginBottom="20px">
