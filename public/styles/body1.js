@@ -224,41 +224,39 @@ const Botao3 = ({ texto, color}) =>
       window.open("/dashboard");
     }
   }
-    const { isOpen:isOpen2, onOpen:onOpen2, onClose:onClose2 } = useDisclosure()
-    return(
-        <>
+  const { isOpen:isOpen2, onOpen:onOpen2, onClose:onClose2 } = useDisclosure()
+  return(
+    <>
         <Button
-            onClick={checkIfIsLogged}
-
-            background="#7928CA" marginLeft="5px" borderRadius="25"  size="sm" color= {color}
-            _hover={{
-                background: "white",
-                color: "black",
-            }}
-            _active={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-            _focus={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
+          onClick={checkIfIsLogged}
+          background="#7928CA" marginLeft="5px" borderRadius="25"  size="sm" color= {color}
+          _hover={{
+              background: "white",
+              color: "black",
+          }}
+          _active={{
+              background: "#7928CA",
+              color: "white",
+              border: "0px solid"
+          }}
+          _focus={{
+              background: "#7928CA",
+              color: "white",
+              border: "0px solid"
+          }}
         >
-            {texto}
-            </Button>
-
-            <Modal isOpen={isOpen2} onClose={onClose2}>
-                <ModalOverlay />
-
-                <ModalContent
-                background = "tranparent"
-                border="25px"
-                >
-                <CardLogin/>
-                </ModalContent>
-            </Modal>    
+          {texto}
+        </Button>
+        
+        <Modal isOpen={isOpen2} onClose={onClose2}>
+          <ModalOverlay />
+          <ModalContent
+            background = "tranparent"
+            border="25px"
+          >
+          <CardLogin/>
+          </ModalContent>
+        </Modal>    
     </>
   );
 }
