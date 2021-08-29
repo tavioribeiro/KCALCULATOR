@@ -157,14 +157,14 @@ import {
       
 
 
-      setnomeUsuario(sessionStorage.getItem('nome'));
+      setnomeUsuario(localStorage.getItem('nome'));
 
-      setIdUsuario(sessionStorage.getItem('idUsuario'));
+      setIdUsuario(localStorage.getItem('idUsuario'));
 
       getData();
 
 
-      if(sessionStorage.getItem('origem') === "2") //Entrar
+      if(localStorage.getItem('origem') === "2") //Entrar
       {
         setPagina(1);//Inicio direto 
       }
@@ -175,15 +175,15 @@ import {
 
     function postuserdata() //Posta os dados gerais (altura, peso...) 
     {
-      if(sessionStorage.getItem('origem') === "1") //Posta
+      if(localStorage.getItem('origem') === "1") //Posta
       {
         condicional = 0;
         axios.post
         (
           server + "/api/postuserdata", 
           {
-            a: sessionStorage.getItem('idUsuario'),
-            b: sessionStorage.getItem('nome'),
+            a: localStorage.getItem('idUsuario'),
+            b: localStorage.getItem('nome'),
             c: document.getElementById('idade').value,
             d: document.getElementById('sexo').value,
             e: document.getElementById('peso').value,
@@ -209,7 +209,7 @@ import {
               respostaPerfil = response.data;
               console.log(respostaPerfil);
               podePegarDados = 0;
-              sessionStorage.setItem('origem', 2);
+              localStorage.setItem('origem', 2);
               setnomeMensagem1("Atualizado com sucesso!");
               postData();
               setPagina(1);
@@ -222,15 +222,15 @@ import {
           }
         })
       }
-      if(sessionStorage.getItem('origem') === "2") //Atualiza
+      if(localStorage.getItem('origem') === "2") //Atualiza
       {
         condicional = 0;
         axios.post
         (
           server + "/api/updateuserdata", 
           {
-            a: sessionStorage.getItem('idUsuario'),
-            b: sessionStorage.getItem('nome'),
+            a: localStorage.getItem('idUsuario'),
+            b: localStorage.getItem('nome'),
             c: document.getElementById('idade').value,
             d: document.getElementById('sexo').value,
             e: document.getElementById('peso').value,
@@ -278,7 +278,7 @@ import {
       (
         server + "/api/getuserdata", 
         {
-          a: sessionStorage.getItem('idUsuario'),
+          a: localStorage.getItem('idUsuario'),
         }
       ).then((response)=>{
         if(response.data != 0)
@@ -309,7 +309,7 @@ import {
       (
         server + "/api/postvalues", 
         {
-          a: sessionStorage.getItem('idUsuario'),
+          a: localStorage.getItem('idUsuario'),
           //b: Math.floor(Math.random() * 40),
           b: calcularImc(),
           c: new Date()
@@ -348,7 +348,7 @@ import {
       (
         server + "/api/getvalues", 
         {
-          a: sessionStorage.getItem('idUsuario'),
+          a: localStorage.getItem('idUsuario'),
         },
       ).then((response)=>{
         if(response.data != 0)

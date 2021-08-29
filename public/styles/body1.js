@@ -76,7 +76,9 @@ const BodyCard = () =>
 
   useEffect(() =>
   {
-    if(sessionStorage.getItem('idUsuario') === null)
+    console.log(localStorage.getItem('idUsuario'));
+
+    if(localStorage.getItem('idUsuario') === null)
     {
       
     }
@@ -86,6 +88,7 @@ const BodyCard = () =>
       window.location = "/dashboard";
     }
   }, []);
+
 
   opcao = 0;
   return (
@@ -210,11 +213,11 @@ const Botao3 = ({ texto, color}) =>
 {
   function checkIfIsLogged()
   {
-    console.log(sessionStorage.getItem('idUsuario'));
+    console.log(localStorage.getItem('idUsuario'));
     
-    if(sessionStorage.getItem('idUsuario') === null)
+    if(localStorage.getItem('idUsuario') === null)
     {
-      sessionStorage.clear();
+      localStorage.clear();
       onOpen2();
     }
     else
@@ -388,10 +391,10 @@ async function search()  // POSSÍVEL TRATAMENTO
       else
       {
         var origem = 2;
-        sessionStorage.clear();
-        sessionStorage.setItem('origem', origem);
-        sessionStorage.setItem('idUsuario', response.data.id);
-        sessionStorage.setItem('nome', response.data.nome);             
+        localStorage.clear();
+        localStorage.setItem('origem', origem);
+        localStorage.setItem('idUsuario', response.data.id);
+        localStorage.setItem('nome', response.data.nome);             
         //window.open("/dashboard");
         window.location = "/dashboard";
         setMensagem("");
@@ -581,10 +584,10 @@ const CardCreate = () =>
           var origem = 1;
           
           //console.log(response.data);
-          sessionStorage.clear();
-          sessionStorage.setItem('origem', origem);
-          sessionStorage.setItem('idUsuario', response.data.b);  
-          sessionStorage.setItem('nome', response.data.a);             
+          localStorage.clear();
+          localStorage.setItem('origem', origem);
+          localStorage.setItem('idUsuario', response.data.b);  
+          localStorage.setItem('nome', response.data.a);             
           //window.open("/dashboard");
           window.location = "/dashboard";
           setMensagem("");
