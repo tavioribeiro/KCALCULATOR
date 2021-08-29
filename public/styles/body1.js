@@ -169,40 +169,39 @@ function BotoesConta()
 
 const Botao2 = ({texto, color}) => 
 {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    return(
-        <>
-        <Button
-            onClick={onOpen}
-            background="#7928CA" marginRight="5px" borderRadius="25"  size="sm" color= {color}
-            _hover={{
-                background: "white",
-                color: "black",
-            }}
-            _active={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-            _focus={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-        >
-            {texto}
-            </Button>
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return(
+    <>
+      <Button
+        onClick={onOpen}
+        background="#7928CA" marginRight="5px" borderRadius="25"  size="sm" color= {color}
+        _hover={{
+            background: "white",
+            color: "black",
+        }}
+        _active={{
+            background: "#7928CA",
+            color: "white",
+            border: "0px solid"
+        }}
+        _focus={{
+            background: "#7928CA",
+            color: "white",
+            border: "0px solid"
+        }}
+      >
+        {texto}
+      </Button>
 
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-
-                <ModalContent
-                background = "tranparent"
-                border="25px"
-                >
-                <CardCreate/>
-                </ModalContent>
-            </Modal>    
+      <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent
+          background = "tranparent"
+          border="25px"
+          >
+          <CardCreate/>
+          </ModalContent>
+      </Modal>    
     </>
   );
 }
