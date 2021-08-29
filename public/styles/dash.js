@@ -58,7 +58,7 @@ import {
 
 
   import axios from 'axios';
-import { ChatIcon } from "@chakra-ui/icons";
+  import { ChatIcon } from "@chakra-ui/icons";
 
   var server = "https://nodetest15.herokuapp.com";
   //var server = "http://localhost:3001";
@@ -74,6 +74,7 @@ import { ChatIcon } from "@chakra-ui/icons";
   export default function Swibc()
   {
     console.log("versão alpha: 0.2 ");
+
     var [nomeUsuario, setnomeUsuario] = useState("");
     var [mensagem1, setnomeMensagem1] = useState("");
     var [idUsuario, setIdUsuario] = useState("");
@@ -149,10 +150,13 @@ import { ChatIcon } from "@chakra-ui/icons";
 
     var [label, setLabel] = useState(new Array());
     var [data, setData] = useState(new Array());
-    
+
     
     useEffect(() =>
     {
+      
+
+
       setnomeUsuario(sessionStorage.getItem('nome'));
 
       setIdUsuario(sessionStorage.getItem('idUsuario'));
@@ -693,6 +697,12 @@ import { ChatIcon } from "@chakra-ui/icons";
       }
       if(pagina === 1)
       {
+        
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
         getUserData();
         //getData();
           
@@ -782,6 +792,8 @@ import { ChatIcon } from "@chakra-ui/icons";
           },
         };
         */
+
+        
        
 
         return [

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 import axios from 'axios';
 
@@ -72,6 +73,19 @@ var opcao = 0;
 const BodyCard = () =>
 {
   console.log("versão alpha: 0.2 ");
+
+  useEffect(() =>
+  {
+    if(sessionStorage.getItem('idUsuario') === null)
+    {
+      
+    }
+    else
+    {
+      console.log("efeffeef");
+      window.location = "/dashboard";
+    }
+  }, []);
 
   opcao = 0;
   return (
@@ -252,10 +266,11 @@ const Botao3 = ({ texto, color}) =>
 
 
 
-const Botao4 = ({onClick, color, texto}) => {
+const Botao4 = ({onClick, color, texto, isLoading}) => {
   return(
       <>
         <Button
+          isLoading = {isLoading}
           onClick = {onClick}
             background="#7928CA" borderRadius="25"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
             _hover={{
@@ -293,6 +308,7 @@ const Botao4 = ({onClick, color, texto}) => {
 function CardLogin ()
 {
   var [mensagem, setMensagem] = useState("");
+  var [isLoading, setIsLoading] = useState(false);
 
 /*
   async function search()  // POSSÍVEL TRATAMENTO
@@ -349,6 +365,7 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
 async function search()  // POSSÍVEL TRATAMENTO
 {
   setMensagem("");
+  setIsLoading(true);
 
   var a = document.getElementById('email').value;
   var b = document.getElementById('password').value;
@@ -366,6 +383,7 @@ async function search()  // POSSÍVEL TRATAMENTO
       if(response.data === 1)
       {
         setMensagem("Senha incoreta!");
+        setIsLoading(false);
       }
       else
       {
@@ -374,8 +392,10 @@ async function search()  // POSSÍVEL TRATAMENTO
         sessionStorage.setItem('origem', origem);
         sessionStorage.setItem('idUsuario', response.data.id);
         sessionStorage.setItem('nome', response.data.nome);             
-        window.open("/dashboard");
+        //window.open("/dashboard");
+        window.location = "/dashboard";
         setMensagem("");
+        setIsLoading(false);
         window.location.reload();
       } 
     }
@@ -383,6 +403,7 @@ async function search()  // POSSÍVEL TRATAMENTO
     {
       //console.log(response.data);
       setMensagem("Usuário não cadastrado!");
+      setIsLoading(false);
     }
     //console.log(response.data);
   })
@@ -470,6 +491,7 @@ async function search()  // POSSÍVEL TRATAMENTO
               <Botao4
                 color="#b0ff29" 
                 texto="Entrar"
+                isLoading={isLoading}
                 //end="/dashboard"
                 onClick={() => search()}
               ></Botao4>
@@ -484,11 +506,12 @@ async function search()  // POSSÍVEL TRATAMENTO
 
 
 
-const Botao5 = ({onClick, color, texto}) =>
+const Botao5 = ({onClick, color, texto, isLoading}) =>
 {
   return(
       <>
         <Button
+          isLoading = {isLoading}
           onClick = {onClick}
             background="#7928CA" borderRadius="25" marginTop="20px"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
             _hover={{
@@ -522,12 +545,16 @@ const Botao5 = ({onClick, color, texto}) =>
 
 const CardCreate = () =>
 {
-
   var [mensagem, setMensagem] = useState("");
+  var [isLoading, setIsLoading] = useState(false);
+
+
+
 
   async function create()  // POSSÍVEL TRATAMENTO
   {
     setMensagem("");
+    setIsLoading(true);
 
     var a = document.getElementById('email').value;
     var b = document.getElementById('password').value;
@@ -547,17 +574,21 @@ const CardCreate = () =>
         if(response.data === 1)
         {
           setMensagem("Senha incoreta!");
+          setIsLoading(false);
         }
         else
         {
           var origem = 1;
           
           //console.log(response.data);
+          sessionStorage.clear();
           sessionStorage.setItem('origem', origem);
           sessionStorage.setItem('idUsuario', response.data.b);  
           sessionStorage.setItem('nome', response.data.a);             
-          window.open("/dashboard");
+          //window.open("/dashboard");
+          window.location = "/dashboard";
           setMensagem("");
+          setIsLoading(false);
           window.location.reload();
         } 
       }
@@ -565,6 +596,7 @@ const CardCreate = () =>
       {
         //console.log(response.data);
         setMensagem("Usuário já cadastrado!");
+        setIsLoading(false);
       }
       console.log(response.data);
     })
@@ -660,6 +692,7 @@ const CardCreate = () =>
                 <Botao5
                   color="#b0ff29" 
                   texto="Cadastrar"
+                  isLoading={isLoading}
                   //end="/dashboard"
                   onClick={() => create()}
                 ></Botao5>
