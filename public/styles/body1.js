@@ -336,9 +336,15 @@ var datetime = "Last Sync: " + currentdate.getDate() + "/"
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
 */
-var currentdate = new Date("Wed Aug 11 2021 19:56:35 GMT-0300 (Horário Padrão de Brasília)"); 
+
+
+
+
+//var currentdate = new Date("Wed Aug 11 2021 19:56:35 GMT-0300 (Horário Padrão de Brasília)"); 
 //console.log(currentdate);
 //console.log(currentdate.getSeconds());
+
+
 
 async function search()  // POSSÍVEL TRATAMENTO
 {
@@ -514,7 +520,8 @@ const Botao5 = ({onClick, color, texto}) =>
 
 
 
-const CardCreate = () => {
+const CardCreate = () =>
+{
 
   var [mensagem, setMensagem] = useState("");
 
@@ -544,7 +551,7 @@ const CardCreate = () => {
         else
         {
           var origem = 1;
-          sessionStorage.clear();
+          
           //console.log(response.data);
           sessionStorage.setItem('origem', origem);
           sessionStorage.setItem('idUsuario', response.data.b);  
