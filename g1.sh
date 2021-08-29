@@ -1,2 +1,5 @@
 #!/bin/bash
-echo Hello World
+
+gnome-terminal
+
+./g.sh
