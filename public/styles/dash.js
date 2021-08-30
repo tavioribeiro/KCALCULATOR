@@ -424,12 +424,12 @@ import {
 
     const Botao6 = ({color, texto}) =>
     {
-      async function sair()
+      function sair()
       {
-        sessionStorage.clear();          
-        window.open("/");
-        window.close();
+        localStorage.clear();          
+        window.location = "/";
       }
+
       return(
           <>
             <Button
