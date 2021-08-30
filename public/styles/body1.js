@@ -194,13 +194,14 @@ const Botao2 = ({texto, color}) =>
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent
+        <ModalOverlay />
+        
+        <ModalContent
           background = "tranparent"
           border="25px"
-          >
-          <CardCreate/>
-          </ModalContent>
+        >
+        <CardCreate/>
+        </ModalContent>
       </Modal>    
     </>
   );
@@ -224,39 +225,40 @@ const Botao3 = ({ texto, color}) =>
       window.open("/dashboard");
     }
   }
+
   const { isOpen:isOpen2, onOpen:onOpen2, onClose:onClose2 } = useDisclosure()
   return(
     <>
-        <Button
-          onClick={checkIfIsLogged}
-          background="#7928CA" marginLeft="5px" borderRadius="25"  size="sm" color= {color}
-          _hover={{
-              background: "white",
-              color: "black",
-          }}
-          _active={{
-              background: "#7928CA",
-              color: "white",
-              border: "0px solid"
-          }}
-          _focus={{
-              background: "#7928CA",
-              color: "white",
-              border: "0px solid"
-          }}
+      <Button
+        onClick={checkIfIsLogged}
+        background="#7928CA" marginLeft="5px" borderRadius="25"  size="sm" color= {color}
+        _hover={{
+            background: "white",
+            color: "black",
+        }}
+        _active={{
+            background: "#7928CA",
+            color: "white",
+            border: "0px solid"
+        }}
+        _focus={{
+            background: "#7928CA",
+            color: "white",
+            border: "0px solid"
+        }}
+      >
+        {texto}
+      </Button>
+      
+      <Modal isOpen={isOpen2} onClose={onClose2}>
+        <ModalOverlay />
+        <ModalContent
+          background = "tranparent"
+          border="25px"
         >
-          {texto}
-        </Button>
-        
-        <Modal isOpen={isOpen2} onClose={onClose2}>
-          <ModalOverlay />
-          <ModalContent
-            background = "tranparent"
-            border="25px"
-          >
-          <CardLogin/>
-          </ModalContent>
-        </Modal>    
+        <CardLogin/>
+        </ModalContent>
+      </Modal>    
     </>
   );
 }
@@ -268,36 +270,35 @@ const Botao3 = ({ texto, color}) =>
 
 const Botao4 = ({onClick, color, texto, isLoading}) => {
   return(
-      <>
-        <Button
-          isLoading = {isLoading}
-          onClick = {onClick}
-            background="#7928CA" borderRadius="25"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
-            _hover={{
-                background: "white",
-                color: "black",
-            }}
-            _active={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-            _focus={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-            _focusWithin={{
-                background: "#7928CA",
-                color: "white",
-                border: "0px solid"
-            }}
-        >
-          {texto}
-        </Button>
-      
-  </>
-);
+    <>
+      <Button
+        isLoading = {isLoading}
+        onClick = {onClick}
+        background="#7928CA" borderRadius="25"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
+        _hover={{
+            background: "white",
+            color: "black",
+        }}
+        _active={{
+            background: "#7928CA",
+            color: "white",
+            border: "0px solid"
+        }}
+        _focus={{
+            background: "#7928CA",
+            color: "white",
+            border: "0px solid"
+        }}
+        _focusWithin={{
+            background: "#7928CA",
+            color: "white",
+            border: "0px solid"
+        }}
+      >
+        {texto}
+      </Button> 
+    </>
+  );
 }
 
 

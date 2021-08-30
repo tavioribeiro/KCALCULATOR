@@ -79,7 +79,7 @@ import {
     var [mensagem1, setnomeMensagem1] = useState("");
     var [idUsuario, setIdUsuario] = useState("");
     var [pagina, setPagina] = useState(0);
-
+    var [isLoading, setIsLoading] = useState(false);
 
     var [imc, setImc] = useState(0);
 
@@ -152,11 +152,11 @@ import {
     var [data, setData] = useState(new Array());
 
     
+
+    
     useEffect(() =>
     {
       
-
-
       setnomeUsuario(localStorage.getItem('nome'));
 
       setIdUsuario(localStorage.getItem('idUsuario'));
@@ -175,6 +175,8 @@ import {
 
     function postuserdata() //Posta os dados gerais (altura, peso...) 
     {
+      setIsLoading(true);
+
       if(localStorage.getItem('origem') === "1") //Posta
       {
         condicional = 0;
@@ -199,10 +201,13 @@ import {
           {
             if(response.data === 1)
             {
+              setIsLoading(false);
               setnomeMensagem1("Não foi possível atualizar os dados!");
             }
             else
             {
+              setIsLoading(false);
+              
               peso = document.getElementById('peso').value;
               altura = document.getElementById('altura').value;
 
@@ -213,11 +218,11 @@ import {
               setnomeMensagem1("Atualizado com sucesso!");
               postData();
               setPagina(1);
-              console.log("dddd22");
             } 
           }
           else
           {
+            setIsLoading(false);
             setnomeMensagem1("Não foi possível atualizar os dados!");
           }
         })
@@ -250,6 +255,7 @@ import {
             if(response.data === 1)
             {
               setnomeMensagem1("Não foi possível atualizar os dados!");
+              setIsLoading(false);
             }
             else
             {
@@ -259,12 +265,13 @@ import {
               setnomeMensagem1("Atualizado com sucesso!");
               setPagina(1);
               postData();
-              console.log("dddd11");
+              setIsLoading(false);
             } 
           }
           else
           {
             setnomeMensagem1("Não foi possível atualizar os dados!");
+            setIsLoading(false);
           }
         })
       }
@@ -379,11 +386,12 @@ import {
     const integrations = useDisclosure();
 
 
-    const Botao5 = ({onClick, color, texto}) =>
+    const Botao5 = ({onClick, color, texto, isLoading}) =>
     {
       return(
           <>
             <Button
+            isLoading = {isLoading}
               onClick = {onClick}
                 background="#7928CA" borderRadius="25" marginTop="20px"  size="sm" color= {color} border="2px solid #b0ff29" width="100%"
                 _hover={{
@@ -1116,6 +1124,7 @@ import {
                             <Botao5
                               color="#b0ff29" 
                               texto="Finalizar"
+                              isLoading={isLoading}
                               //end="/dashboard"
                               onClick={() => postuserdata()}
                             ></Botao5>
