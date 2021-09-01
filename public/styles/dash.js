@@ -919,8 +919,15 @@ import {
                     <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                       <Stack align={'center'}>
                         <Heading textAlign="center" color="white" fontSize={'4xl'}>Completar perfil</Heading>
+                
                         <Text fontSize="16px" color={'white'} textAlign="center">
-                          Esses dados serão utilizados para calcular os índices
+                          Esses dados serão utilizados para calcular os índices que serão exibidos na próxima página!
+                        </Text>
+
+                        <br></br>
+
+                        <Text fontSize="13px" color={'white'} textAlign="center">
+                          Atenção: Não deixe valores em branco e insira apenas números.
                         </Text>
                       </Stack>
                       <Box
@@ -933,16 +940,21 @@ import {
                         <Stack spacing={4}>
                           
                         <FormControl id="idade">
-                            <FormLabel>Idade</FormLabel>
+                            <FormLabel>Idade | Em anos</FormLabel>
                             <Input 
+                              placeholder="Ex: 25 "
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 
                               color="black"
                               border="2px solid white" 
                               type="email" 
+                              _placeholder={{
+                                color: '#545454',
+                                fontSize: "13px"
+                              }}
                               _focus={{
                                 background: "white",
                                 color: "black",
@@ -952,10 +964,10 @@ import {
                           </FormControl>
 
                           <FormControl id="sexo">
-                            <FormLabel>Sexo</FormLabel>
+                            <FormLabel>Sexo biológico</FormLabel>
                             <Select
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 
@@ -974,16 +986,21 @@ import {
                           </FormControl>
                           
                           <FormControl id="peso">
-                            <FormLabel>Peso</FormLabel>
+                            <FormLabel>Peso | Em quilogramas</FormLabel>
                             <Input 
+                            placeholder="Ex: 75"
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 
                               color="black"
                               border="2px solid white" 
                               type="email" 
+                              _placeholder={{
+                                color: '#545454',
+                                fontSize: "13px"
+                              }}
                               _focus={{
                                 background: "white",
                                 color: "black",
@@ -993,16 +1010,21 @@ import {
                           </FormControl>
 
                           <FormControl id="altura">
-                            <FormLabel>Altura</FormLabel>
+                            <FormLabel>Altura | Em centímetros</FormLabel>
                             <Input 
+                              placeholder="Ex: 179"
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 
                               color="black"
                               border="2px solid white" 
                               type="email" 
+                              _placeholder={{
+                                color: '#545454',
+                                fontSize: "13px"
+                              }}
                               _focus={{
                                 background: "white",
                                 color: "black",
@@ -1012,16 +1034,21 @@ import {
                           </FormControl>
 
                           <FormControl id="abdomem">
-                            <FormLabel>Abdomem</FormLabel>
+                            <FormLabel>Abdomem | Em centímetros</FormLabel>
                             <Input 
+                              placeholder="Ex: 90"
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 
                               color="black"
                               border="2px solid white" 
                               type="email" 
+                              _placeholder={{
+                                color: '#545454',
+                                fontSize: "13px"
+                              }}
                               _focus={{
                                 background: "white",
                                 color: "black",
@@ -1031,16 +1058,21 @@ import {
                           </FormControl>
 
                           <FormControl id="pescoco">
-                            <FormLabel>Pescoço</FormLabel>
+                            <FormLabel>Pescoço | Em centímetros</FormLabel>
                             <Input 
+                              placeholder="Ex: 37"
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 
                               color="black"
                               border="2px solid white" 
                               type="email" 
+                              _placeholder={{
+                                color: '#545454',
+                                fontSize: "13px"
+                              }}
                               _focus={{
                                 background: "white",
                                 color: "black",
@@ -1050,16 +1082,21 @@ import {
                           </FormControl>
 
                           <FormControl id="quadril">
-                            <FormLabel>Quadril</FormLabel>
+                            <FormLabel>Quadril | Em centímetros</FormLabel>
                             <Input 
+                              placeholder="Ex: 107"
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 
                               color="black"
                               border="2px solid white" 
-                              type="email" 
+                              type="email"
+                              _placeholder={{
+                                color: '#545454',
+                                fontSize: "13px"
+                              }} 
                               _focus={{
                                 background: "white",
                                 color: "black",
@@ -1072,7 +1109,7 @@ import {
                             <FormLabel>Nivel de Atividade</FormLabel>
                             <Select
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 
@@ -1097,7 +1134,7 @@ import {
                             <FormLabel>Objetivo</FormLabel>
                             <Select
                               height="30px"
-                              fontSize="16px"
+                              fontSize="14px"
                               rounded="25px" 
                               border="0px" 
                               background="white" 

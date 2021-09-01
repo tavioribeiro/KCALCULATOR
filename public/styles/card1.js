@@ -21,10 +21,13 @@ import {
 const ArticleList = () => {
   return (
     <Container maxW={'5xl'} p="12" paddingTop="1" color="white">
-      <Heading as="h1" textAlign="center">Sobre</Heading>
+
+      <Heading as="h1" size="2xl" textAlign="center">Sobre</Heading>
       
       <VStack paddingTop="40px" spacing="2" alignItems="flex-start">
-        <Heading as="h4">What we write about</Heading>
+
+        <Heading as="h2" size="lg">Origem</Heading>
+
         <Text as="p" fontSize="16px">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
           condimentum quam arcu, eu tempus tortor molestie at. Vestibulum

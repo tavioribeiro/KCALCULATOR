@@ -122,7 +122,7 @@ const BodyCard = () =>
             
           </chakra.h2>
           <chakra.p mt={4} color={useColorModeValue("white", "gray.400")}>
-            Com o Kcalculator é possível realizar vários cálculos relacionados à área da saúde e fitness. TMB, TDEE, porcentagem de gordura...
+            Com o Kcalculator é possível calcular vários índices relacionados à área da saúde e fitness. Taxa Metabolica Basal, Gasto Calórico Diário, porcentagem de gordura...
           </chakra.p>
 
           <chakra.p mt={4} color={useColorModeValue("white", "gray.400")}>
