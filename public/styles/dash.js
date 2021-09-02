@@ -73,7 +73,7 @@ import {
   
   export default function Swibc()
   {
-    console.log("versão alpha: 0.2 ");
+    console.log("versão alpha: 0.2.1");
 
     var [nomeUsuario, setnomeUsuario] = useState("");
     var [mensagem1, setnomeMensagem1] = useState("");
@@ -81,11 +81,18 @@ import {
     var [pagina, setPagina] = useState(0);
     var [isLoading, setIsLoading] = useState(false);
 
-    var [imc, setImc] = useState(0);
+    var [imc, setIMC] = useState(0);
+    var [gc, setGC] = useState(0);
 
     var peso = 0;
     var altura = 0;
-    
+    var idade = 0;
+    var abdomem = 0;
+    var pescoco = 0;
+    var quadril = 0;
+    var sexo = "";
+    var atividade = "";
+    var objetivo = "";
     /*
 
     //----------------------- Perfil -----------------------
@@ -149,7 +156,8 @@ import {
 
 
     var [label, setLabel] = useState(new Array());
-    var [data, setData] = useState(new Array());
+    var [dataIMC, setDataIMC] = useState(new Array());
+    var [dataGC, setDataGC] = useState(new Array());
 
     
 
@@ -176,6 +184,16 @@ import {
     function postuserdata() //Posta os dados gerais (altura, peso...) 
     {
       setIsLoading(true);
+
+      peso = document.getElementById('peso').value;
+      altura = document.getElementById('altura').value;
+      idade = document.getElementById('idade').value;
+      sexo = document.getElementById('sexo').value;
+      abdomem = document.getElementById('abdomem').value;
+      pescoco = document.getElementById('pescoco').value;
+      quadril = document.getElementById('quadril').value;
+      atividade = document.getElementById('nivelatividade').value;
+      objetivo = document.getElementById('objetivo').value;
 
       if(localStorage.getItem('origem') === "1") //Posta
       {
@@ -207,9 +225,6 @@ import {
             else
             {
               setIsLoading(false);
-              
-              peso = document.getElementById('peso').value;
-              altura = document.getElementById('altura').value;
 
               respostaPerfil = response.data;
               console.log(respostaPerfil);
@@ -249,9 +264,6 @@ import {
         ).then((response)=>{
           if(response.data != 0)
           {
-            peso = document.getElementById('peso').value;
-            altura = document.getElementById('altura').value;
-
             if(response.data === 1)
             {
               setnomeMensagem1("Não foi possível atualizar os dados!");
@@ -318,8 +330,9 @@ import {
         {
           a: localStorage.getItem('idUsuario'),
           //b: Math.floor(Math.random() * 40),
-          b: calcularImc(),
-          c: new Date()
+          b: new Date(),
+          c: calcularImc(),
+          d: calcularGc(),
         }
       ).then((response)=>{
 
@@ -647,47 +660,65 @@ import {
     function calcularImc()
     {
       var result = (peso / (altura * altura)) * 10000;
+      console.log("===============================");
+      console.log(peso);
+      console.log(altura);
       console.log(result);
+      console.log("===============================");
       return result;
     }
 
 
-    function gcPerfil()
+    function calcularGc()
     { 
-      if(sexo_perfil_g == 1)
+      if(sexo === "Masculino")
       {
-        gc_perfil_g = (495 / ( 1.0324 - 0.19077 * (log(abdomem_perfil_g - pescoco_perfil_g) / log(10)) + 0.15456 * (log(altura_perfil_g) / log(10))) - 450);
+        var result = (495 / ( 1.0324 - 0.19077 * (Math.log(abdomem - pescoco) / Math.log(10)) + 0.15456 * (Math.log(altura) / Math.log(10))) - 450);
+        console.log(result);
+        return result;
       }
 
-      if(sexo_perfil_g == 2)
+      if(sexo === "Feminino")
       { 
-        gc_perfil_g = (495 / ( 1.29579 - 0.35004 * (log(abdomem_perfil_g + quadril_perfil_g - pescoco_perfil_g) / log(10)) + 0.22100 * (log(altura_perfil_g) / log(10))) - 450);
+        var result = (495 / ( 1.29579 - 0.35004 * (Math.log(abdomem + quadril - pescoco) / Math.log(10)) + 0.22100 * (Math.log(altura) / Math.log(10))) - 450);
+        console.log(result);
+        return result;
       }
     }
+
+
+
+
 
     function generateCharts()
     {
       var tempLabel = [];
-      var tempData = [];
+      var tempDataIMC = [];
+      var tempDataGC = [];
 
-      var currentdate = new Date("Wed Aug 11 2021 19:56:35 GMT-0300 (Horário Padrão de Brasília)"); 
-    //console.log(currentdate);
-    //console.log(currentdate.getSeconds());
+      //var currentdate = new Date("Wed Aug 11 2021 19:56:35 GMT-0300 (Horário Padrão de Brasília)"); 
+      //console.log(currentdate);
+      //console.log(currentdate.getSeconds());
 
       for(var i = 0; i<respostaDados.length;i++)
       {
         var currentdate = new Date(respostaDados[i].data); 
+
         tempLabel.push(currentdate.getHours() + ":" + currentdate.getMinutes());
-        tempData.push(respostaDados[i].imc);
+
+        tempDataIMC.push(respostaDados[i].imc);
+        tempDataGC.push(respostaDados[i].gc);
 
         if(i === respostaDados.length - 1)
         {
-          setImc(respostaDados[i].imc);
+          setIMC(respostaDados[i].imc);
+          setGC(respostaDados[i].gc);
         }
       }
 
       setLabel(tempLabel);
-      setData(tempData);
+      setDataIMC(tempDataIMC);
+      setDataGC(tempDataGC);
     }
 
 
@@ -695,8 +726,6 @@ import {
 
     function RetornoCondicional()
     {
-    
-      
       if(pagina === 0)
       {
         return[
@@ -717,21 +746,32 @@ import {
 
 
 
-        const dataChart = {
+        const dataChartIMC = {
           labels: label,
           datasets: [
             {
               label: 'Índice',
-              data: data,
+              data: dataIMC,
               fill: false,
               backgroundColor: '#b0ff29',
               borderColor: 'rgba(255, 255, 255, 0.5)',
-              //color: 'rgba(255, 255, 255, 0.5)',
-              
-            },
-            
+              //color: 'rgba(255, 255, 255, 0.5)', 
+            },     
           ],
-          
+        };
+
+        const dataChartGC = {
+          labels: label,
+          datasets: [
+            {
+              label: 'Porcentagem',
+              data: dataGC,
+              fill: false,
+              backgroundColor: '#b0ff29',
+              borderColor: 'rgba(255, 255, 255, 0.5)',
+              //color: 'rgba(255, 255, 255, 0.5)', 
+            },     
+          ],
         };
 
         const optionsChart = {
@@ -849,27 +889,27 @@ import {
                               <Tbody>
                                 <Tr>
                                   <Td color="white" textAlign="center">Índice de Massa Corporal</Td>
-                                  <Td color="white" textAlign="center">{imc}</Td>
+                                  <Td color="white" textAlign="center" fontWeight="bold">{imc}</Td>
                                 </Tr>
 
                                 <Tr>
                                   <Td color="white" textAlign="center">Gasto Energético Diário</Td>
-                                  <Td color="white" textAlign="center">não disponível</Td>
+                                  <Td color="white" textAlign="center" fontWeight="bold">não disponível</Td>
                                 </Tr>
 
                                 <Tr>
                                   <Td color="white" textAlign="center">Gordura Corporal</Td>
-                                  <Td color="white" textAlign="center">não disponível</Td>
+                                  <Td color="white" textAlign="center" fontWeight="bold">{gc} %</Td>
                                 </Tr>
 
                                 <Tr>
                                   <Td color="white" textAlign="center">Taxa Metabólica Basal</Td>
-                                  <Td color="white" textAlign="center">não disponível</Td>
+                                  <Td color="white" textAlign="center" fontWeight="bold">não disponível</Td>
                                 </Tr>
 
                                 <Tr>
                                   <Td color="white" textAlign="center">Peso Ideal</Td>
-                                  <Td color="white" textAlign="center">não disponível</Td>
+                                  <Td color="white" textAlign="center" fontWeight="bold">não disponível</Td>
                                 </Tr>
                                 
                               </Tbody>
@@ -885,17 +925,25 @@ import {
 
               <div className="box24">
                 <div className="parent3">
+
                   <div className="div1-3">
                     <Flex justify="center">
                       <Box width="90%" borderRadius="25px" border="2px solid #b0ff29" backgroundColor="black" margin="20px" padding="5px">
                         <h1 className='titleIndice'>IMC</h1>
                         <p className='titleSubIndice'>Seu histórico de resultados</p>
-                        <Line data={dataChart} options={optionsChart} />
+                        <Line data={dataChartIMC} options={optionsChart} />
                       </Box>
                     </Flex>
-                    
                   </div>
+
                   <div className="div2-3">
+                    <Flex justify="center">
+                      <Box width="90%" borderRadius="25px" border="2px solid #b0ff29" backgroundColor="black" margin="20px" padding="5px">
+                        <h1 className='titleIndice'>Gordura Corporal</h1>
+                        <p className='titleSubIndice'>Seu histórico de resultados</p>
+                        <Line data={dataChartGC} options={optionsChart} />
+                      </Box>
+                    </Flex>
                   </div>
                   <div className="div3-3"></div>
                   <div className="div4-3"></div>
