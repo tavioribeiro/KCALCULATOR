@@ -31,6 +31,7 @@ import {
     Divider,
     Square,
     Text,
+    useToast,
   } from "@chakra-ui/react";
 
   import { Line } from 'react-chartjs-2';
@@ -74,6 +75,7 @@ import {
   export default function Swibc()
   {
     console.log("versão alpha: 0.2.1");
+    const toast = useToast();
 
     var [nomeUsuario, setnomeUsuario] = useState("");
     var [mensagem1, setnomeMensagem1] = useState("");
@@ -221,6 +223,14 @@ import {
             {
               setIsLoading(false);
               setnomeMensagem1("Não foi possível atualizar os dados!");
+
+              toast({
+                title: "Não foi possível atualizar os dados!",
+                //description: "Seus dados foram sincronizados com sucesso.",
+                status: "error",
+                duration: 3500,
+                isClosable: true,
+              });
             }
             else
             {
@@ -231,6 +241,15 @@ import {
               podePegarDados = 0;
               localStorage.setItem('origem', 2);
               setnomeMensagem1("Atualizado com sucesso!");
+
+              toast({
+                title: "Atualizado com sucesso!",
+                //description: "Seus dados foram sincronizados com sucesso.",
+                status: "success",
+                duration: 3500,
+                isClosable: true,
+              });
+
               postData();
               setPagina(1);
             } 
@@ -239,6 +258,14 @@ import {
           {
             setIsLoading(false);
             setnomeMensagem1("Não foi possível atualizar os dados!");
+
+            toast({
+              title: "Não foi possível atualizar os dados!",
+              //description: "Seus dados foram sincronizados com sucesso.",
+              status: "error",
+              duration: 3500,
+              isClosable: true,
+            });
           }
         })
       }
@@ -267,6 +294,15 @@ import {
             if(response.data === 1)
             {
               setnomeMensagem1("Não foi possível atualizar os dados!");
+
+              toast({
+                title: "Não foi possível atualizar os dados!",
+                //description: "Seus dados foram sincronizados com sucesso.",
+                status: "error",
+                duration: 3500,
+                isClosable: true,
+              });
+
               setIsLoading(false);
             }
             else
@@ -275,6 +311,15 @@ import {
               console.log(respostaPerfil);
               podePegarDados = 0;
               setnomeMensagem1("Atualizado com sucesso!");
+
+              toast({
+                title: "Atualizado com sucesso!",
+                //description: "Seus dados foram sincronizados com sucesso.",
+                status: "success",
+                duration: 3500,
+                isClosable: true,
+              });
+
               setPagina(1);
               postData();
               setIsLoading(false);
@@ -283,6 +328,15 @@ import {
           else
           {
             setnomeMensagem1("Não foi possível atualizar os dados!");
+
+            toast({
+              title: "Não foi possível atualizar os dados!",
+              //description: "Seus dados foram sincronizados com sucesso.",
+              status: "error",
+              duration: 3500,
+              isClosable: true,
+            });
+
             setIsLoading(false);
           }
         })
@@ -305,6 +359,14 @@ import {
           if(response.data === 1)
           {
             setnomeMensagem1("Não foi possível atualizar os dados!");
+
+            toast({
+              title: "Não foi possível atualizar os dados!",
+              //description: "Seus dados foram sincronizados com sucesso.",
+              status: "error",
+              duration: 3500,
+              isClosable: true,
+            });
           }
           else
           {
@@ -314,6 +376,14 @@ import {
         else
         {
           setnomeMensagem1("Não foi possível atualizar os dados!");
+
+          toast({
+            title: "Não foi possível atualizar os dados!",
+            //description: "Seus dados foram sincronizados com sucesso.",
+            status: "error",
+            duration: 3500,
+            isClosable: true,
+          });
         }
       })
     }
@@ -377,7 +447,15 @@ import {
 
           if(response.data === 1)
           {
-            setnomeMensagem1("Não foi possível atualizar os dados!");
+            setnomeMensagem1("Não foi possível baixar os dados!");
+
+            toast({
+              title: "Não foi possível baixar os dados!",
+              //description: "Seus dados foram sincronizados com sucesso.",
+              status: "success",
+              duration: 3500,
+              isClosable: true,
+            });
           }
           else
           {
@@ -387,7 +465,15 @@ import {
         }
         else
         {
-          setnomeMensagem1("Não foi possível atualizar os dados!");
+          setnomeMensagem1("Não foi possível baixar os dados!");
+
+          toast({
+            title: "Não foi possível baixar os dados!",
+            //description: "Seus dados foram sincronizados com sucesso.",
+            status: "error",
+            duration: 3500,
+            isClosable: true,
+          });
         }
       })
     }

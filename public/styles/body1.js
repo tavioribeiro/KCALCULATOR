@@ -29,7 +29,7 @@ import {
   Checkbox,
   Stack,
   Link,
-
+  useToast,
   Heading,
   Text,
   Center,
@@ -89,8 +89,15 @@ const BodyCard = () =>
     }
   }, []);
 
-
   opcao = 0;
+
+
+
+
+
+
+
+
   return (
       <>
     <Flex
@@ -311,6 +318,7 @@ function CardLogin ()
   var [mensagem, setMensagem] = useState("");
   var [isLoading, setIsLoading] = useState(false);
 
+  const toast = useToast();
 /*
   async function search()  // POSSÍVEL TRATAMENTO
   {
@@ -384,6 +392,15 @@ async function search()  // POSSÍVEL TRATAMENTO
       if(response.data === 1)
       {
         setMensagem("Senha incoreta!");
+
+        toast({
+          title: "Senha incoreta!",
+          //description: "We've created your account for you.",
+          status: "error",
+          duration: 2500,
+          isClosable: true,
+        })
+
         setIsLoading(false);
       }
       else
@@ -404,6 +421,15 @@ async function search()  // POSSÍVEL TRATAMENTO
     {
       //console.log(response.data);
       setMensagem("Usuário não cadastrado!");
+
+      toast({
+        title: "Usuário não cadastrado!",
+        //description: "We've created your account for you.",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+      })
+
       setIsLoading(false);
     }
     //console.log(response.data);
@@ -549,7 +575,7 @@ const CardCreate = () =>
   var [mensagem, setMensagem] = useState("");
   var [isLoading, setIsLoading] = useState(false);
 
-
+  const toast = useToast();
 
 
   async function create()  // POSSÍVEL TRATAMENTO
@@ -575,6 +601,15 @@ const CardCreate = () =>
         if(response.data === 1)
         {
           setMensagem("Senha incoreta!");
+
+          toast({
+            title: "Senha incoreta!",
+            //description: "We've created your account for you.",
+            status: "error",
+            duration: 2500,
+            isClosable: true,
+          })
+
           setIsLoading(false);
         }
         else
@@ -597,6 +632,15 @@ const CardCreate = () =>
       {
         //console.log(response.data);
         setMensagem("Usuário já cadastrado!");
+
+        toast({
+          title: "Usuário já cadastrado!",
+          //description: "We've created your account for you.",
+          status: "warning",
+          duration: 2500,
+          isClosable: true,
+        })
+
         setIsLoading(false);
       }
       console.log(response.data);
